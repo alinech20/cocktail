@@ -1,4 +1,4 @@
 docker/secrets
 backend/.env
 backend/.venv
-backend/__pycache__
+**/__pycache__
