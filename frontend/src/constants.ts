@@ -1,5 +1,10 @@
-export const BASE_URL = '/api/v1/'
-
 export const ENDPOINTS = {
-  TEST: 'recipes/'
+  BASE_URL: '/api/v1/',
+  RECIPES: {
+    GET: 'recipes/'
+  }
+}
+
+export const PINIA_STORE_KEYS = {
+  RECIPE: 'Recipe'
 }

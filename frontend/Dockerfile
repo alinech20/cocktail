@@ -13,7 +13,7 @@ COPY . .
 # Stage-2 - dev
 FROM base as dev
 
-ENV NODE_ENV "DEV"
+ENV MODE "DEV"
 RUN pnpm i
 
 CMD ["pnpm", "run", "dev"]
@@ -21,7 +21,7 @@ CMD ["pnpm", "run", "dev"]
 # Starge-3 - prod
 FROM base as prod
 
-ENV NODE_ENV "PROD"
+ENV MODE "PROD"
 RUN pnpm i --prod
 
 CMD ["pnpm", "run", "build"]
