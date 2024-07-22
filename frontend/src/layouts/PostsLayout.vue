@@ -26,7 +26,7 @@
 }
 
 .footer {
-  height: sizes.$PostsHeaderHeight;
+  height: sizes.$PostsFooterHeight;
   width: 100vw;
   background-color: red;
   position: fixed;
