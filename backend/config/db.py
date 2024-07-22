@@ -6,13 +6,16 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-env = getenv("ENV")
-
-if env != "PROD":
-  db_url = getenv("DEV_DB")
-else:
-  db_url = getenv("PROD_DB")
+db_url = getenv("DB_URL")
 
 engine = create_engine(db_url)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
+
+def db_session():
+  db = SessionLocal()
+
+  try:
+    yield db
+  finally:
+    db.close()

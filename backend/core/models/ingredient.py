@@ -27,9 +27,9 @@ class IngredientCategory(Base):
   name: Mapped[str] = mapped_column(String(16))
 
   created_at: Mapped[datetime] = mapped_column(server_default=func.current_timestamp())
-  modified_at: Mapped[datetime] = mapped_column(server_default=func.current_timestamp())
+  modified_at: Mapped[datetime] = mapped_column(onupdate=func.current_timestamp())
 
-  ingredients: Mapped[List["Ingredient"]] = relationship(back_populates="category")
+  ingredients: Mapped[List["Ingredient"]] = relationship(back_populates="category", lazy="joined")
 
 class Ingredient(Base):
   __tablename__ = "ingredients"
@@ -42,8 +42,6 @@ class Ingredient(Base):
   alternative: Mapped[Optional[str]] = mapped_column(String(512))
 
   created_at: Mapped[datetime] = mapped_column(server_default=func.current_timestamp())
-  modified_at: Mapped[datetime] = mapped_column(server_default=func.current_timestamp())
+  modified_at: Mapped[datetime] = mapped_column(onupdate=func.current_timestamp())
 
-  category: Mapped["IngredientCategory"] = relationship(back_populates="ingredients")
-
-
+  category: Mapped["IngredientCategory"] = relationship(back_populates="ingredients", lazy="joined")
