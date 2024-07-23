@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { useRecipeStore } from '@/stores/recipe'
-import { storeToRefs } from 'pinia'
 import { onBeforeMount } from 'vue'
-
-const { recipes } = storeToRefs(useRecipeStore())
+import { useRecipeStore } from '@/stores/recipe'
+import RecipeList from '@/components/explore/RecipeList.vue'
+import SearchRecipe from '@/components/explore/SearchRecipe.vue'
 
 onBeforeMount(() => {
   useRecipeStore().fetchRecipes()
@@ -11,7 +10,15 @@ onBeforeMount(() => {
 </script>
 
 <template>
-  <div>
-    {{ recipes }}
-  </div>
+  <SearchRecipe />
+  <hr class="separator" />
+  <RecipeList />
 </template>
+
+<style lang="scss">
+@use '../../styles/variables/spacing.scss';
+
+.separator {
+  margin: spacing.$SmallItemSpacer 0;
+}
+</style>

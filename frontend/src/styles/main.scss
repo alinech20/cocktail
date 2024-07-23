@@ -1,4 +1,16 @@
+@use "./variables/sizes.scss";
+@use "./variables/spacing.scss";
+
 body {
   margin: 0;
-  font-size: 16px;
+  font-size: sizes.$RootFontSize;
+}
+
+input {
+  font-size: 1rem;
+}
+
+.custom-input {
+  border-radius: sizes.$CustomInputBorderRadius;
+  padding: spacing.$CustomInputPadding;
 }
