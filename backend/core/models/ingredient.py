@@ -6,6 +6,7 @@ from sqlalchemy import ForeignKey
 from sqlalchemy import String
 from sqlalchemy.orm import mapped_column, Mapped, relationship
 from sqlalchemy.schema import CreateSchema
+from sqlalchemy.ext.associationproxy import AssociationProxy, association_proxy
 
 from config.db import Base
 
@@ -45,3 +46,4 @@ class Ingredient(Base):
   modified_at: Mapped[datetime] = mapped_column(onupdate=func.current_timestamp())
 
   category: Mapped["IngredientCategory"] = relationship(back_populates="ingredients", lazy="joined")
+  category_name: AssociationProxy[str] = association_proxy("category", "name")

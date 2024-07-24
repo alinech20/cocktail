@@ -7,10 +7,16 @@ export interface ICategory {
 
 export interface IIngredient {
   id?: number
-  categoryId: number
+  category: ICategory
   name: string
   alternative: TNullableOptional<string>
   photo: TNullableOptional<string>
+}
+
+export interface IIngredientUnit {
+  id?: number
+  name: string
+  abbr: string
 }
 
 export interface IRecipeStep {
@@ -18,11 +24,17 @@ export interface IRecipeStep {
   text: string
 }
 
+export interface IRecipeIngredient extends IIngredient {
+  quantity: number
+  note: TNullableOptional<string>
+  unit: IIngredientUnit
+}
+
 export interface IRecipe {
   id?: number
   title: string
   note: TNullableOptional<string>
   photo: TNullableOptional<string>
-  ingredients: IIngredient[]
+  ingredients: IRecipeIngredient[]
   steps: IRecipeStep[]
 }

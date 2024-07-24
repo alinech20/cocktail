@@ -1,7 +1,7 @@
 import { useApiRequest } from '@/composables/useApiRequest'
 import { useLogger } from '@/composables/useLogger'
 import { API, PINIA_STORE_KEYS } from '@/constants'
-import type { IRecipe } from '@/types/recipes'
+import type { IRecipe, IRecipeIngredient, IRecipeStep } from '@/types/recipes'
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 
@@ -10,6 +10,40 @@ export const useRecipeStore = defineStore(PINIA_STORE_KEYS.RECIPE, () => {
 
   const searchTerm = ref<string>('')
   const recipes = ref<IRecipe[]>([])
+
+  const initRecipe = (data: any) => {
+    const { id, title, note, photo } = data
+    const steps: IRecipeStep[] = data.steps.map((s: any) => ({
+      stepNo: s.step_no,
+      text: s.text
+    }))
+    const ingredients: IRecipeIngredient[] = data.recipe_ingredients.map((i: any) => ({
+      id: i.ingredient.id,
+      category: {
+        id: i.ingredient.category.id,
+        name: i.ingredient.category.name
+      },
+      name: i.ingredient.name,
+      alternative: i.ingredient.alternative,
+      photo: i.ingredient.photo,
+      note: i.note,
+      quantity: i.quantity,
+      unit: {
+        id: i.unit.id,
+        name: i.unit.name,
+        abbr: i.unit.abbr
+      }
+    }))
+
+    return {
+      id,
+      title,
+      note,
+      photo,
+      steps,
+      ingredients
+    }
+  }
 
   const fetchRecipes = async (refresh = false) => {
     if (recipes.value.length && !refresh) {
@@ -23,7 +57,7 @@ export const useRecipeStore = defineStore(PINIA_STORE_KEYS.RECIPE, () => {
 
     onFetchResponse(() => {
       recipes.value.length = 0
-      recipes.value.push(...data.value)
+      for (const r of data.value) recipes.value.push(initRecipe(r))
       info('Recipes fetched successfully!')
     })
     onFetchError(() => logError(error.value))
@@ -53,7 +87,7 @@ export const useRecipeStore = defineStore(PINIA_STORE_KEYS.RECIPE, () => {
       .json()
 
     onFetchResponse(() => {
-      currentRecipe.value = data.value
+      currentRecipe.value = initRecipe(data.value)
       info(`Recipe with id ${id} fetched successfully!`)
     })
     onFetchError(() => logError(error.value))
