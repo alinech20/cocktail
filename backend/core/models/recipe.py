@@ -24,7 +24,7 @@ class Recipe(Base):
   created_at: Mapped[datetime] = mapped_column(server_default=func.current_timestamp())
   modified_at: Mapped[datetime] = mapped_column(onupdate=func.current_timestamp())
 
-  ingredients: Mapped[List[Ingredient]] = relationship(secondary="recipes.recipes_ingredients", lazy="joined")
+  ingredients: Mapped[List["RecipeIngredient"]] = relationship(lazy="joined")
   steps: Mapped[List["RecipeStep"]] = relationship(lazy="joined")
 
 class RecipeIngredient(Base):
