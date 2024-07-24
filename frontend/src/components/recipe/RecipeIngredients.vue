@@ -20,5 +20,3 @@ defineProps<{
     </section>
   </article>
 </template>
-
-<style lang="scss"></style>
