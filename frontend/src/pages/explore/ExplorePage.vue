@@ -10,9 +10,11 @@ onBeforeMount(() => {
 </script>
 
 <template>
-  <SearchRecipe />
-  <hr class="separator" />
-  <RecipeList />
+  <section>
+    <SearchRecipe />
+    <hr class="separator" />
+    <RecipeList />
+  </section>
 </template>
 
 <style lang="scss">

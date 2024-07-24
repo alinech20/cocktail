@@ -40,7 +40,7 @@ const ingredientsSummary = computed(() => props.recipe.ingredients.map((i) => i.
 
   &__title {
     margin: 0;
-    font-size: 1.125rem;
+    font-size: 1.2rem;
   }
 }
 </style>

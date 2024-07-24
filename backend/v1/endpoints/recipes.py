@@ -10,6 +10,6 @@ router = APIRouter(prefix="/recipes", tags=["Recipes"])
 def read_all(db: Session = Depends(db_session)):
   return crud.recipes.get_all(db)
 
-@router.get("/{id}")
+@router.get("/{id}/")
 def read_one_by_id(id: int, db: Session = Depends(db_session)):
   return crud.recipes.get_one_by_id(id, db)

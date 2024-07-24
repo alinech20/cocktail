@@ -14,3 +14,9 @@ input {
   border-radius: sizes.$CustomInputBorderRadius;
   padding: spacing.$CustomInputPadding;
 }
+
+.recipe {
+  h2 {
+    font-size: sizes.$RecipePageSubtitleSize;
+  }
+}
