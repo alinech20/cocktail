@@ -15,17 +15,15 @@ const orderedSteps = computed<IRecipeStep[]>(() =>
 </script>
 
 <template>
-  <article>
-    <section class="recipe-steps">
-      <h2 class="recipe-steps__title">And follow these simple steps:</h2>
-      <ol class="recipe-steps__list">
-        <li class="recipe-steps__item" v-for="step in orderedSteps" :key="step.stepNo">
-          {{ step.text }}
-        </li>
-      </ol>
-    </section>
-    <p v-if="note">
-      {{ note }}
-    </p>
-  </article>
+  <section class="recipe-steps">
+    <h2 class="recipe-steps__title">And to follow these simple steps:</h2>
+    <ol class="recipe-steps__list">
+      <li class="recipe-steps__item" v-for="step in orderedSteps" :key="step.step_no">
+        {{ step.text }}
+      </li>
+    </ol>
+  </section>
+  <p v-if="note">
+    {{ note }}
+  </p>
 </template>

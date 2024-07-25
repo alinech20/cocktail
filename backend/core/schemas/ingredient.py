@@ -41,7 +41,7 @@ class IngredientCreate(IngredientBase):
 
 class Ingredient(IngredientBase):
   id: int
-  category: IngredientCategory
+  # category: IngredientCategory
 
   class Config:
     orm_mode = True

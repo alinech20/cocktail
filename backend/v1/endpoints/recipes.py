@@ -4,12 +4,14 @@ from sqlalchemy.orm import Session
 from config.db import db_session
 from core import crud
 
+from core.schemas.recipe import Recipe as RecipeResponse
+
 router = APIRouter(prefix="/recipes", tags=["Recipes"])
 
-@router.get("/")
+@router.get("/", response_model=list[RecipeResponse])
 def read_all(db: Session = Depends(db_session)):
   return crud.recipes.get_all(db)
 
-@router.get("/{id}/")
+@router.get("/{id}/", response_model=RecipeResponse)
 def read_one_by_id(id: int, db: Session = Depends(db_session)):
   return crud.recipes.get_one_by_id(id, db)

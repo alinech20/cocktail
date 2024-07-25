@@ -2,19 +2,19 @@ from typing import Optional
 from pydantic import BaseModel
 from datetime import datetime
 
-from .ingredient import IngredientUnit
+from .ingredient import IngredientUnit, Ingredient
 
 class RecipeIngredientBase(BaseModel):
-  recipe_id: int
-  ingredient_id: int
-  unit_id: int
   quantity: float
   note: Optional[str]
 
 class RecipeIngredientCreate(RecipeIngredientBase):
-  pass
+  recipe_id: int
+  ingredient_id: int
+  unit_id: int
 
 class RecipeIngredient(RecipeIngredientBase):
+  ingredient: Ingredient
   unit: IngredientUnit
   created_at: datetime
   modified_at: datetime
@@ -23,12 +23,11 @@ class RecipeIngredient(RecipeIngredientBase):
     orm_mode = True
 
 class RecipeStepBase(BaseModel):
-  recipe_id: int
   step_no: int
   text: str
 
 class RecipeStepCreate(RecipeStepBase):
-  pass
+  recipe_id: int
 
 class RecipeStep(RecipeStepBase):
   class Config:

@@ -6,7 +6,9 @@ const props = defineProps<{
   recipe: IRecipe
 }>()
 
-const ingredientsSummary = computed(() => props.recipe.ingredients.map((i) => i.name).join(', '))
+const ingredientsSummary = computed(() =>
+  props.recipe.ingredients.map((i) => i.ingredient.name).join(', ')
+)
 </script>
 
 <template>
@@ -26,6 +28,7 @@ const ingredientsSummary = computed(() => props.recipe.ingredients.map((i) => i.
 </template>
 
 <style lang="scss">
+@use '../../styles/variables/colors.scss';
 @use '../../styles/variables/sizes.scss';
 @use '../../styles/variables/spacing.scss';
 
@@ -35,12 +38,17 @@ const ingredientsSummary = computed(() => props.recipe.ingredients.map((i) => i.
   margin: spacing.$SmallItemSpacer 0;
 
   &__details {
-    padding: 10px;
+    padding: spacing.$SmallItemSpacer spacing.$MediumItemSpacer;
   }
 
   &__title {
     margin: 0;
     font-size: 1.2rem;
+  }
+
+  &__ingredients-summary {
+    line-height: spacing.$TightLineHeight;
+    opacity: colors.$FadedText;
   }
 }
 </style>

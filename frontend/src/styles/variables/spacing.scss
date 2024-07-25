@@ -1,3 +1,12 @@
-$CustomInputPadding: 10px 20px;
-$MainContentPadding: 10px;
+// general spacers
 $SmallItemSpacer: 10px;
+$MediumItemSpacer: 20px;
+$LargeItemSpacer: 40px;
+
+// text spacers
+$TightLineHeight: 1.25em;
+$BodyLineHeight: 1.5em;
+
+// targeted spacers
+$CustomInputPadding: $SmallItemSpacer $MediumItemSpacer;
+$MainContentPadding: $SmallItemSpacer;

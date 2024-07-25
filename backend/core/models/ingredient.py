@@ -45,5 +45,4 @@ class Ingredient(Base):
   created_at: Mapped[datetime] = mapped_column(server_default=func.current_timestamp())
   modified_at: Mapped[datetime] = mapped_column(onupdate=func.current_timestamp())
 
-  category: Mapped["IngredientCategory"] = relationship(back_populates="ingredients", lazy="joined")
-  category_name: AssociationProxy[str] = association_proxy("category", "name")
+  category: Mapped["IngredientCategory"] = relationship(lazy="joined")

@@ -7,7 +7,8 @@ export interface ICategory {
 
 export interface IIngredient {
   id?: number
-  category: ICategory
+  // category: ICategory
+  category_id: number
   name: string
   alternative: TNullableOptional<string>
   photo: TNullableOptional<string>
@@ -20,14 +21,15 @@ export interface IIngredientUnit {
 }
 
 export interface IRecipeStep {
-  stepNo: number
+  step_no: number
   text: string
 }
 
-export interface IRecipeIngredient extends IIngredient {
+export interface IRecipeIngredient {
   quantity: number
   note: TNullableOptional<string>
   unit: IIngredientUnit
+  ingredient: IIngredient
 }
 
 export interface IRecipe {

@@ -1,68 +1,34 @@
 import { useApiRequest } from '@/composables/useApiRequest'
 import { useLogger } from '@/composables/useLogger'
 import { API, PINIA_STORE_KEYS } from '@/constants'
-import type { IRecipe, IRecipeIngredient, IRecipeStep } from '@/types/recipes'
+import type { IRecipe } from '@/types/recipes'
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 
 export const useRecipeStore = defineStore(PINIA_STORE_KEYS.RECIPE, () => {
   const { info, error: logError } = useLogger()
 
-  const searchTerm = ref<string>('')
   const recipes = ref<IRecipe[]>([])
-
-  const initRecipe = (data: any) => {
-    const { id, title, note, photo } = data
-    const steps: IRecipeStep[] = data.steps.map((s: any) => ({
-      stepNo: s.step_no,
-      text: s.text
-    }))
-    const ingredients: IRecipeIngredient[] = data.recipe_ingredients.map((i: any) => ({
-      id: i.ingredient.id,
-      category: {
-        id: i.ingredient.category.id,
-        name: i.ingredient.category.name
-      },
-      name: i.ingredient.name,
-      alternative: i.ingredient.alternative,
-      photo: i.ingredient.photo,
-      note: i.note,
-      quantity: i.quantity,
-      unit: {
-        id: i.unit.id,
-        name: i.unit.name,
-        abbr: i.unit.abbr
-      }
-    }))
-
-    return {
-      id,
-      title,
-      note,
-      photo,
-      steps,
-      ingredients
-    }
-  }
-
   const fetchRecipes = async (refresh = false) => {
     if (recipes.value.length && !refresh) {
       info('Recipes already available')
       return
     }
 
+    recipes.value.length = 0
+
     info('Fetching recipes...')
 
     const { data, error, onFetchResponse, onFetchError } = useApiRequest(API.RECIPES).get().json()
 
     onFetchResponse(() => {
-      recipes.value.length = 0
-      for (const r of data.value) recipes.value.push(initRecipe(r))
+      recipes.value.push(...data.value)
       info('Recipes fetched successfully!')
     })
     onFetchError(() => logError(error.value))
   }
 
+  const searchTerm = ref<string>('')
   const filteredRecipes = computed<IRecipe[]>(() => {
     if (searchTerm.value.length < 3) return recipes.value
 
@@ -73,8 +39,27 @@ export const useRecipeStore = defineStore(PINIA_STORE_KEYS.RECIPE, () => {
   })
 
   const currentRecipe = ref<IRecipe>()
+  const setCurrentRecipe = async (id: number) => {
+    info(`Setting recipe with id ${id} as current recipe...`)
 
-  const fetchRecipeById = async (id: number) => {
+    if (currentRecipe.value?.id === id)
+      return info(`Recipe with id ${id} already set as current recipe`)
+
+    if (!recipes.value.length) return fetchRecipeById(id)
+
+    currentRecipe.value = recipes.value.find((r) => r.id === id)
+
+    info(`Recipe with id ${id} set as current recipe!`)
+  }
+
+  const fetchRecipeById = async (id: number, refresh = false) => {
+    if (currentRecipe.value?.id === id && !refresh) {
+      info(`Recipe with id ${id} already available!`)
+      return
+    }
+
+    currentRecipe.value = undefined
+
     info(`Fetching recipe with id ${id}...`)
 
     const { data, error, onFetchResponse, onFetchError } = useApiRequest({
@@ -87,7 +72,7 @@ export const useRecipeStore = defineStore(PINIA_STORE_KEYS.RECIPE, () => {
       .json()
 
     onFetchResponse(() => {
-      currentRecipe.value = initRecipe(data.value)
+      currentRecipe.value = data.value
       info(`Recipe with id ${id} fetched successfully!`)
     })
     onFetchError(() => logError(error.value))
@@ -100,6 +85,7 @@ export const useRecipeStore = defineStore(PINIA_STORE_KEYS.RECIPE, () => {
 
     filteredRecipes,
     currentRecipe,
-    fetchRecipeById
+    setCurrentRecipe
+    // fetchRecipeById
   }
 })
