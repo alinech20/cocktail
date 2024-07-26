@@ -25,11 +25,11 @@ const prefix = computed(() => {
 </template>
 
 <style lang="scss">
-@use '../../styles/variables/spacing.scss';
-@use '../../styles/variables/sizes.scss';
+@import '../../styles/variables/spacing.css';
+@import '../../styles/variables/sizes.css';
 
 .recipe-header {
-  margin: -(spacing.$MainContentPadding);
+  margin: calc(-1 * var(--main-content-padding));
 
   &__image {
     width: 100%;
@@ -38,9 +38,9 @@ const prefix = computed(() => {
 
   &__title {
     text-align: center;
-    font-size: sizes.$RecipePageTitleSize;
-    margin-left: spacing.$MediumItemSpacer;
-    margin-right: spacing.$MediumItemSpacer;
+    font-size: var(--recipe-page-title-size);
+    margin-left: var(--medium-item-spacer);
+    margin-right: var(--medium-item-spacer);
   }
 }
 </style>

@@ -21,11 +21,12 @@ const { capitalizeFirstLetter } = useTextFormatter()
   </article>
 </template>
 
-<style lang="scss">
-@use '../styles/variables/sizes.scss';
+<style lang="css">
+@import '../styles/variables/sizes.css';
+@import '../styles/variables/themes.css';
 
 .route-item--active {
-  color: white;
+  color: var(--white);
 }
 
 .item-icon-wrapper {
@@ -34,7 +35,7 @@ const { capitalizeFirstLetter } = useTextFormatter()
   align-items: center;
 
   .item-icon {
-    font-size: sizes.$FooterNavigationIconSize;
+    font-size: var(--footer-navigation-icon-size);
   }
 }
 </style>

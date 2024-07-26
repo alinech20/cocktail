@@ -18,9 +18,9 @@ onBeforeMount(() => {
 </template>
 
 <style lang="scss">
-@use '../../styles/variables/spacing.scss';
+@import '../../styles/variables/spacing.css';
 
 .separator {
-  margin: spacing.$SmallItemSpacer 0;
+  margin: var(--small-item-spacer) 0;
 }
 </style>

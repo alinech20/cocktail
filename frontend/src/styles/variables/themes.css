@@ -1,0 +1,19 @@
+:root {
+  --faded-text: 0.8; /* use this for opacity on texts to create a secondary, dimmed text */
+  --default-font: "Raleway", sans-serif;
+  --white: #fff;
+  --body-font-weight: 500;
+}
+
+.tropical-fun {
+  --primary-color: #FF6B6B;
+  --secondary-color: #2AC1B5;
+  --tertiary-color: #41A317;
+  --quaternary-color: #F2C200;
+  --text-primary: var(--primary-color);
+  --text-on-primary: var(--white);
+}
+
+.dark {
+  /* TODO */
+}

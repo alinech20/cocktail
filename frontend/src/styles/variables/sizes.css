@@ -1,0 +1,19 @@
+:root {
+  /* font sizes */
+  --root-font-size: 16px;
+
+  /* headers & footers */
+  --posts-header-height: 60px;
+  --posts-header-width: 100vw;
+  --posts-footer-height: 60px;
+  --posts-footer-width: 100vw;
+  --footer-navigation-icon-size: 1.5rem;
+
+  /* recipes */
+  --recipe-card-height: 120px;
+  --recipe-page-title-size: 1.375rem;
+  --recipe-page-subtitle-size: 1.125rem;
+
+  /* others */
+  --custom-input-border-radius: 4px;
+}

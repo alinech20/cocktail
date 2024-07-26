@@ -1,5 +1,9 @@
+<script setup lang="ts">
+const model = defineModel()
+</script>
+
 <template>
-  <input class="custom-input search-bar" type="text" />
+  <input class="custom-input search-bar" v-model="model" type="text" />
 </template>
 
 <style lang="scss">

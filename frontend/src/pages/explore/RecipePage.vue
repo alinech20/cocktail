@@ -31,9 +31,9 @@ onBeforeMount(() => {
 </template>
 
 <style lang="scss">
-@use '../../styles/variables/spacing.scss';
+@import '../../styles/variables/spacing.css';
 
 .recipe__details {
-  padding: spacing.$SmallItemSpacer spacing.$LargeItemSpacer;
+  padding: 0 var(--large-item-spacer);
 }
 </style>

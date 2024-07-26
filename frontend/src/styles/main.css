@@ -1,0 +1,35 @@
+@import "./variables/sizes.css";
+@import "./variables/spacing.css";
+@import url("./variables/themes.css");
+
+* {
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  margin: 0;
+  font-size: var(--root-font-size);
+  line-height: var(--body-line-height);
+  color: var(--text-primary);
+  font-family: var(--default-font);
+  font-weight: var(--body-font-weight);
+}
+
+input {
+  font-size: 1rem;
+}
+
+p {
+  margin: 0.5em 0;
+}
+
+.custom-input {
+  border-radius: var(--custom-input-border-radius);
+  padding: var(--custom-input-padding);
+}
+
+.recipe {
+  h2 {
+    font-size: var(--recipe-page-subtitle-size);
+  }
+}

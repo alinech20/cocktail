@@ -17,23 +17,23 @@
 </template>
 
 <style lang="scss">
-@use '../styles/variables/sizes.scss';
-@use '../styles/variables/spacing.scss';
+@import '../styles/variables/sizes.css';
+@import '../styles/variables/spacing.css';
 
 .header {
-  height: sizes.$PostsHeaderHeight;
-  width: sizes.$PostsHeaderWidth;
+  height: var(--posts-header-height);
+  width: var(--posts-header-width);
   background-color: red;
   position: sticky;
 }
 
 .content {
-  padding: spacing.$MainContentPadding;
+  padding: var(--main-content-padding);
 }
 
 .footer {
-  height: sizes.$PostsFooterHeight;
-  width: sizes.$PostsFooterWidth;
+  height: var(--posts-footer-height);
+  width: var(--posts-footer-width);
   background-color: red;
   position: fixed;
   bottom: 0;

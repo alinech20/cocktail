@@ -1,0 +1,14 @@
+:root {
+  /* general spacers */
+  --small-item-spacer: 10px;
+  --medium-item-spacer: 20px;
+  --large-item-spacer: 40px;
+
+  /* text spacers */
+  --tight-line-height: 1.25em;
+  --body-line-height: 1.5em;
+
+  /* targeted spacers */
+  --custom-input-padding: var(--small-item-spacer) var(--medium-item-spacer);
+  --main-content-padding: var(--small-item-spacer);
+}

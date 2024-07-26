@@ -9,13 +9,21 @@ const props = defineProps<{
 const ingredientsSummary = computed(() =>
   props.recipe.ingredients.map((i) => i.ingredient.name).join(', ')
 )
+
+const getResizedPhoto = (photo: string) => {
+  if (photo.includes('placehold')) return photo
+
+  const pathSlices = photo.split('upload/')
+  return `${pathSlices[0]}upload/w_120/${pathSlices[1]}`
+}
 </script>
 
 <template>
   <article class="recipe-card">
-    <section class="recipe-card__image-wrapper">
-      <img class="recipe-card__image" :src="recipe.photo || 'https://placehold.co/120x120'" />
-    </section>
+    <section
+      class="recipe-card__image-wrapper"
+      :style="`background-image: url(${getResizedPhoto(recipe.photo || 'https://placehold.co/120x120')});`"
+    ></section>
     <section class="recipe-card__details">
       <h2 class="recipe-card__title">
         {{ recipe.title }}
@@ -28,17 +36,23 @@ const ingredientsSummary = computed(() =>
 </template>
 
 <style lang="scss">
-@use '../../styles/variables/colors.scss';
-@use '../../styles/variables/sizes.scss';
-@use '../../styles/variables/spacing.scss';
+@import '../../styles/variables/themes.css';
+@import '../../styles/variables/sizes.css';
+@import '../../styles/variables/spacing.css';
 
 .recipe-card {
   display: flex;
-  height: sizes.$RecipeCardHeight;
-  margin: spacing.$SmallItemSpacer 0;
+  height: var(--recipe-card-height);
+  margin: var(--small-item-spacer) 0;
+
+  &__image-wrapper {
+    flex: 0 0 120px;
+    background-position: top;
+    background-size: cover;
+  }
 
   &__details {
-    padding: spacing.$SmallItemSpacer spacing.$MediumItemSpacer;
+    padding: var(--small-item-spacer) var(--medium-item-spacer);
   }
 
   &__title {
@@ -47,8 +61,8 @@ const ingredientsSummary = computed(() =>
   }
 
   &__ingredients-summary {
-    line-height: spacing.$TightLineHeight;
-    opacity: colors.$FadedText;
+    line-height: var(--tight-line-height);
+    opacity: var(--faded-text);
   }
 }
 </style>
