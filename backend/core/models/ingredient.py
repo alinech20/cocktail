@@ -6,7 +6,6 @@ from sqlalchemy import ForeignKey
 from sqlalchemy import String
 from sqlalchemy.orm import mapped_column, Mapped, relationship
 from sqlalchemy.schema import CreateSchema
-from sqlalchemy.ext.associationproxy import AssociationProxy, association_proxy
 
 from config.db import Base
 
@@ -30,7 +29,7 @@ class IngredientCategory(Base):
   created_at: Mapped[datetime] = mapped_column(server_default=func.current_timestamp())
   modified_at: Mapped[datetime] = mapped_column(onupdate=func.current_timestamp())
 
-  ingredients: Mapped[List["Ingredient"]] = relationship(back_populates="category", lazy="joined")
+  # ingredients: Mapped[List["Ingredient"]] = relationship(back_populates="category", lazy="joined")
 
 class Ingredient(Base):
   __tablename__ = "ingredients"
@@ -38,7 +37,7 @@ class Ingredient(Base):
 
   id: Mapped[int] = mapped_column(primary_key=True)
   category_id: Mapped[int] = mapped_column(ForeignKey("ingredients.categories.id"))
-  name: Mapped[Optional[str]] = mapped_column(String(32))
+  name: Mapped[str] = mapped_column(String(32))
   photo: Mapped[Optional[str]] = mapped_column(String(256))
   alternative: Mapped[Optional[str]] = mapped_column(String(512))
 

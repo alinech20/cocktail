@@ -20,7 +20,7 @@ class RecipeIngredient(RecipeIngredientBase):
   modified_at: datetime
 
   class Config:
-    orm_mode = True
+    from_attributes = True
 
 class RecipeStepBase(BaseModel):
   step_no: int
@@ -31,7 +31,7 @@ class RecipeStepCreate(RecipeStepBase):
 
 class RecipeStep(RecipeStepBase):
   class Config:
-    orm_mode = True
+    from_attributes = True
 
 class RecipeBase(BaseModel):
   title: str
@@ -49,4 +49,4 @@ class Recipe(RecipeBase):
   modified_at: datetime
 
   class Config:
-    orm_mode = True
+    from_attributes = True
