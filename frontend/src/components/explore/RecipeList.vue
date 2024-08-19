@@ -9,10 +9,13 @@ const goToRecipe = (id: number) => router.push({ path: `/recipes/${id}` })
 </script>
 
 <template>
-  <RecipeCard
-    v-for="recipe in filteredRecipes"
-    :key="recipe.id"
-    :recipe="recipe"
-    @click="goToRecipe(recipe.id!)"
-  />
+  <section v-if="filteredRecipes.length > 0">
+    <RecipeCard
+      v-for="recipe in filteredRecipes"
+      :key="recipe.id"
+      :recipe="recipe"
+      @click="goToRecipe(recipe.id!)"
+    />
+  </section>
+  <h3 v-else class="no-results">There are no recipes matching your search :(</h3>
 </template>

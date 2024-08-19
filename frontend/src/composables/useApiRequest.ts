@@ -6,9 +6,15 @@ import { useLogger } from './useLogger'
 
 export const useApiRequest = (path: IApiPath | string) => {
   const { debug } = useLogger()
-  const { replaceEndpointPlaceholders } = useApiRequestUtils()
+  const { replaceEndpointPlaceholders, addQueryParams } = useApiRequestUtils()
 
-  const endpoint = typeof path === 'string' ? path : replaceEndpointPlaceholders(path)
+  const endpoint =
+    typeof path === 'string'
+      ? path
+      : addQueryParams({
+          url: replaceEndpointPlaceholders(path),
+          query: path.query
+        })
   debug(`Final endpoint value: ${endpoint}`)
 
   const apiCall = createFetch({

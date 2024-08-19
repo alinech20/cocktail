@@ -1,12 +1,40 @@
 import { useApiRequest } from '@/composables/useApiRequest'
 import { useLogger } from '@/composables/useLogger'
 import { API, PINIA_STORE_KEYS } from '@/constants'
+import type { IRecipeApiQueryParams } from '@/types/api'
 import type { IRecipe } from '@/types/recipes'
 import { defineStore } from 'pinia'
-import { computed, ref } from 'vue'
+import { ref } from 'vue'
 
 export const useRecipeStore = defineStore(PINIA_STORE_KEYS.RECIPE, () => {
   const { info, error: logError } = useLogger()
+
+  const searchTerm = ref<string>('')
+  const filteredRecipes = ref<IRecipe[]>([])
+  const filterRecipes = async () => {
+    if (!searchTerm.value) {
+      filteredRecipes.value = recipes.value
+      return
+    }
+
+    info('Fetching filtered recipes...')
+
+    const { data, error, onFetchResponse, onFetchError } = useApiRequest({
+      url: API.RECIPES.FILTER,
+      query: {
+        name: searchTerm.value
+      } as IRecipeApiQueryParams
+    })
+      .get()
+      .json()
+
+    onFetchResponse(() => {
+      filteredRecipes.value.length = 0
+      filteredRecipes.value.push(...data.value)
+      info('Recipes filtered successfully!')
+    })
+    onFetchError(() => logError(error.value))
+  }
 
   const recipes = ref<IRecipe[]>([])
   const fetchRecipes = async (refresh = false) => {
@@ -19,24 +47,18 @@ export const useRecipeStore = defineStore(PINIA_STORE_KEYS.RECIPE, () => {
 
     info('Fetching recipes...')
 
-    const { data, error, onFetchResponse, onFetchError } = useApiRequest(API.RECIPES).get().json()
+    const { data, error, onFetchResponse, onFetchError } = useApiRequest(API.RECIPES.ALL)
+      .get()
+      .json()
 
     onFetchResponse(() => {
+      searchTerm.value = ''
       recipes.value.push(...data.value)
+      filteredRecipes.value.push(...data.value)
       info('Recipes fetched successfully!')
     })
     onFetchError(() => logError(error.value))
   }
-
-  const searchTerm = ref<string>('')
-  const filteredRecipes = computed<IRecipe[]>(() => {
-    if (searchTerm.value.length < 3) return recipes.value
-
-    info('Filtering recipes based on the search term')
-    return recipes.value.filter((r) =>
-      r.title.toLowerCase().includes(searchTerm.value.toLowerCase())
-    )
-  })
 
   const currentRecipe = ref<IRecipe>()
   const setCurrentRecipe = async (id: number) => {
@@ -63,7 +85,7 @@ export const useRecipeStore = defineStore(PINIA_STORE_KEYS.RECIPE, () => {
     info(`Fetching recipe with id ${id}...`)
 
     const { data, error, onFetchResponse, onFetchError } = useApiRequest({
-      url: API.RECIPE_BY_ID,
+      url: API.RECIPES.BY_ID,
       params: {
         recipeId: id
       }
@@ -80,10 +102,12 @@ export const useRecipeStore = defineStore(PINIA_STORE_KEYS.RECIPE, () => {
 
   return {
     searchTerm,
+    filteredRecipes,
+    filterRecipes,
+
     recipes,
     fetchRecipes,
 
-    filteredRecipes,
     currentRecipe,
     setCurrentRecipe
     // fetchRecipeById
