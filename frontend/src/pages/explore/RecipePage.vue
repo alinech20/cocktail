@@ -24,8 +24,11 @@ onBeforeMount(() => {
   <section class="recipe">
     <RecipeHeader :title="currentRecipe?.title" :image="currentRecipe?.photo" />
     <section class="recipe__details">
+      <p v-if="currentRecipe?.note">
+        {{ currentRecipe.note }}
+      </p>
       <RecipeIngredients :ingredients="currentRecipe?.ingredients" />
-      <RecipeSteps :steps="currentRecipe?.steps" :note="currentRecipe?.note" />
+      <RecipeSteps :steps="currentRecipe?.steps" />
     </section>
   </section>
 </template>

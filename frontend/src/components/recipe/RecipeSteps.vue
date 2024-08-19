@@ -1,11 +1,9 @@
 <script setup lang="ts">
-import type { TNullableOptional } from '@/types/helpers'
 import type { IRecipeStep } from '@/types/recipes'
 import { computed } from 'vue'
 
 const props = defineProps<{
   steps?: IRecipeStep[]
-  note: TNullableOptional<string>
 }>()
 
 const orderedSteps = computed<IRecipeStep[]>(() =>
@@ -23,7 +21,4 @@ const orderedSteps = computed<IRecipeStep[]>(() =>
       </li>
     </ol>
   </section>
-  <p v-if="note">
-    {{ note }}
-  </p>
 </template>
