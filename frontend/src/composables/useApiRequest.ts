@@ -24,7 +24,7 @@ export const useApiRequest = (path: IApiPath | string) => {
         ctx.error = {
           code: ctx.response?.status,
           title: ctx.response?.statusText,
-          message: ctx.data.detail,
+          message: ctx.data,
           url: ctx.response?.url
         }
 

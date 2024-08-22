@@ -4,6 +4,8 @@ export interface IApiParams {
 
 export interface IRecipeApiQueryParams {
   name?: string
+  page?: number
+  size?: number
 }
 
 export interface IApiPath {

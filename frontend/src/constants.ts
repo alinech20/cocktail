@@ -7,6 +7,8 @@ export const API = {
   }
 }
 
+export const RECIPE_PAGE_SIZE = 10
+
 export const PINIA_STORE_KEYS = {
   RECIPE: 'Recipe'
 }

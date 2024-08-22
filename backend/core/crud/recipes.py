@@ -25,11 +25,11 @@ def get_many_where(name: str | None, ing: list[str] | None, page: int, size: int
 
   # print(query)
 
-  return query.offset(skip).limit(size).all()
+  return query.order_by(Recipe.id.desc()).offset(skip).limit(size).all()
 
 def get_all(db: Session, page: int, size: int):
   skip = (page - 1) * size
-  return db.query(Recipe).offset(skip).limit(size).all()
+  return db.query(Recipe).order_by(Recipe.id.desc()).offset(skip).limit(size).all()
 
 def get_one_by_id(id: int, db: Session):
   return db.query(Recipe).where(Recipe.id == id).first()

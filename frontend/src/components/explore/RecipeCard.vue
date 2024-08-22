@@ -6,9 +6,15 @@ const props = defineProps<{
   recipe: IRecipe
 }>()
 
-const ingredientsSummary = computed(() =>
-  props.recipe.ingredients.map((i) => i.ingredient.name).join(', ')
-)
+const ingredientsSummary = computed(() => {
+  const ingString = props.recipe.ingredients
+    .slice(0, 4)
+    .map((i) => i.ingredient.name)
+    .join(', ')
+
+  if (props.recipe.ingredients.length > 4) return ingString + ' and more...'
+  return ingString
+})
 
 const getResizedPhoto = (photo: string) => {
   if (photo.includes('placehold')) return photo
@@ -44,6 +50,14 @@ const getResizedPhoto = (photo: string) => {
   display: flex;
   height: var(--recipe-card-height);
   margin: var(--small-item-spacer) 0;
+
+  &:first-of-type {
+    margin-top: 0;
+  }
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
 
   &__image-wrapper {
     flex: 0 0 120px;

@@ -1,63 +1,91 @@
 import { useApiRequest } from '@/composables/useApiRequest'
 import { useLogger } from '@/composables/useLogger'
-import { API, PINIA_STORE_KEYS } from '@/constants'
+import { API, PINIA_STORE_KEYS, RECIPE_PAGE_SIZE } from '@/constants'
 import type { IRecipeApiQueryParams } from '@/types/api'
 import type { IRecipe } from '@/types/recipes'
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 
 export const useRecipeStore = defineStore(PINIA_STORE_KEYS.RECIPE, () => {
   const { info, error: logError } = useLogger()
+  const currentPage = computed(() => Math.ceil(filteredRecipes.value.length / RECIPE_PAGE_SIZE))
+  const lastPage = ref(false)
 
   const searchTerm = ref<string>('')
   const filteredRecipes = ref<IRecipe[]>([])
-  const filterRecipes = async () => {
-    if (!searchTerm.value) {
+  const filterRecipes = async (refresh = false, addPage = false) => {
+    if (!searchTerm.value && !refresh && !addPage) {
       filteredRecipes.value = recipes.value
       return
     }
 
+    if (!addPage) filteredRecipes.value.length = 0
+
     info('Fetching filtered recipes...')
 
-    const { data, error, onFetchResponse, onFetchError } = useApiRequest({
+    const apiRequest = useApiRequest({
       url: API.RECIPES.FILTER,
       query: {
-        name: searchTerm.value
+        name: searchTerm.value,
+        page: currentPage.value + 1
       } as IRecipeApiQueryParams
     })
-      .get()
-      .json()
+
+    const { data, error, onFetchResponse, onFetchError } = apiRequest.get().json()
 
     onFetchResponse(() => {
-      filteredRecipes.value.length = 0
+      if (data.value.length === 0) return (lastPage.value = true)
+
       filteredRecipes.value.push(...data.value)
+
+      if (currentPage.value !== filteredRecipes.value.length / RECIPE_PAGE_SIZE)
+        lastPage.value = true
+
       info('Recipes filtered successfully!')
     })
     onFetchError(() => logError(error.value))
   }
 
   const recipes = ref<IRecipe[]>([])
-  const fetchRecipes = async (refresh = false) => {
-    if (recipes.value.length && !refresh) {
+  const fetchRecipes = async (refresh = false, addPage = false) => {
+    if (recipes.value.length && !refresh && !addPage) {
       info('Recipes already available')
       return
     }
 
-    recipes.value.length = 0
+    if (!addPage) recipes.value.length = 0
 
     info('Fetching recipes...')
 
-    const { data, error, onFetchResponse, onFetchError } = useApiRequest(API.RECIPES.ALL)
-      .get()
-      .json()
+    const apiRequest = useApiRequest({
+      url: API.RECIPES.ALL,
+      query: {
+        page: currentPage.value + 1
+      } as IRecipeApiQueryParams
+    })
+
+    const { data, error, onFetchResponse, onFetchError } = apiRequest.get().json()
 
     onFetchResponse(() => {
+      if (data.value.length === 0) return (lastPage.value = true)
+
       searchTerm.value = ''
       recipes.value.push(...data.value)
       filteredRecipes.value.push(...data.value)
+
+      if (currentPage.value !== filteredRecipes.value.length / RECIPE_PAGE_SIZE)
+        lastPage.value = true
+
       info('Recipes fetched successfully!')
     })
     onFetchError(() => logError(error.value))
+  }
+
+  const loadNextPage = async () => {
+    if (lastPage.value) return
+
+    if (!searchTerm.value) fetchRecipes(false, true)
+    else filterRecipes(false, true)
   }
 
   const currentRecipe = ref<IRecipe>()
@@ -107,6 +135,9 @@ export const useRecipeStore = defineStore(PINIA_STORE_KEYS.RECIPE, () => {
 
     recipes,
     fetchRecipes,
+
+    lastPage,
+    loadNextPage,
 
     currentRecipe,
     setCurrentRecipe
