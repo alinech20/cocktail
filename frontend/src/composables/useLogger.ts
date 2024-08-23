@@ -1,9 +1,13 @@
+import { BUS_EVENTS } from '@/constants'
 import type { IApiCallError } from '@/types/errors'
 import type { TNullable } from '@/types/helpers'
+import type { ISnackBarMessage } from '@/types/snackbar'
 import { useLogFormatter } from '@/utils/useLogFormatter'
+import { useEventBus } from '@vueuse/core'
 import log, { type Logger, type LogLevelNames } from 'loglevel'
 
 export const useLogger = () => {
+  const snackbar = useEventBus<ISnackBarMessage>(BUS_EVENTS.SNACKBAR)
   let instance: TNullable<Logger> = null
 
   if (!instance) {
@@ -34,8 +38,18 @@ export const useLogger = () => {
     instance.warn(msg)
   }
 
-  const error = (error: IApiCallError) => {
-    instance.error(formatApiError(error))
+  const error = (error: IApiCallError, display = true) => {
+    const formattedError = formatApiError(error)
+    instance.error(formattedError)
+
+    if (display) {
+      const userError = `Error ${error.code} ${error.title}: ${error.url}`
+
+      snackbar.emit({
+        msg: userError,
+        style: 'error'
+      })
+    }
   }
 
   return {

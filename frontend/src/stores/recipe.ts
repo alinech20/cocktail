@@ -14,14 +14,15 @@ export const useRecipeStore = defineStore(PINIA_STORE_KEYS.RECIPE, () => {
   const searchTerm = ref<string>('')
   const filteredRecipes = ref<IRecipe[]>([])
   const filterRecipes = async (refresh = false, addPage = false) => {
+    info('Fetching filtered recipes...')
+
     if (!searchTerm.value && !refresh && !addPage) {
+      info('No search term available, returning all recipes')
       filteredRecipes.value = recipes.value
       return
     }
 
     if (!addPage) filteredRecipes.value.length = 0
-
-    info('Fetching filtered recipes...')
 
     const apiRequest = useApiRequest({
       url: API.RECIPES.FILTER,
@@ -34,6 +35,7 @@ export const useRecipeStore = defineStore(PINIA_STORE_KEYS.RECIPE, () => {
     const { data, error, onFetchResponse, onFetchError } = apiRequest.get().json()
 
     onFetchResponse(() => {
+      info('Got response from server')
       if (data.value.length === 0) return (lastPage.value = true)
 
       filteredRecipes.value.push(...data.value)
@@ -48,14 +50,14 @@ export const useRecipeStore = defineStore(PINIA_STORE_KEYS.RECIPE, () => {
 
   const recipes = ref<IRecipe[]>([])
   const fetchRecipes = async (refresh = false, addPage = false) => {
+    info('Fetching recipes...')
+
     if (recipes.value.length && !refresh && !addPage) {
       info('Recipes already available')
       return
     }
 
     if (!addPage) recipes.value.length = 0
-
-    info('Fetching recipes...')
 
     const apiRequest = useApiRequest({
       url: API.RECIPES.ALL,
@@ -67,6 +69,7 @@ export const useRecipeStore = defineStore(PINIA_STORE_KEYS.RECIPE, () => {
     const { data, error, onFetchResponse, onFetchError } = apiRequest.get().json()
 
     onFetchResponse(() => {
+      info('Got response from server')
       if (data.value.length === 0) return (lastPage.value = true)
 
       searchTerm.value = ''
@@ -82,7 +85,11 @@ export const useRecipeStore = defineStore(PINIA_STORE_KEYS.RECIPE, () => {
   }
 
   const loadNextPage = async () => {
-    if (lastPage.value) return
+    info('Getting next page of recipes...')
+    if (lastPage.value) {
+      info('Already on the last page')
+      return
+    }
 
     if (!searchTerm.value) fetchRecipes(false, true)
     else filterRecipes(false, true)
@@ -103,14 +110,14 @@ export const useRecipeStore = defineStore(PINIA_STORE_KEYS.RECIPE, () => {
   }
 
   const fetchRecipeById = async (id: number, refresh = false) => {
+    info(`Fetching recipe with id ${id}...`)
+
     if (currentRecipe.value?.id === id && !refresh) {
       info(`Recipe with id ${id} already available!`)
       return
     }
 
     currentRecipe.value = undefined
-
-    info(`Fetching recipe with id ${id}...`)
 
     const { data, error, onFetchResponse, onFetchError } = useApiRequest({
       url: API.RECIPES.BY_ID,
@@ -122,6 +129,7 @@ export const useRecipeStore = defineStore(PINIA_STORE_KEYS.RECIPE, () => {
       .json()
 
     onFetchResponse(() => {
+      info('Got response from server')
       currentRecipe.value = data.value
       info(`Recipe with id ${id} fetched successfully!`)
     })

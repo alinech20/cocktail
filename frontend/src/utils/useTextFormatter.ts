@@ -1,5 +1,13 @@
+import { useLogger } from '@/composables/useLogger'
+
 export const useTextFormatter = () => {
-  const capitalizeFirstLetter = (text: string) => text[0].toUpperCase() + text.slice(1)
+  const { info, debug } = useLogger()
+
+  const capitalizeFirstLetter = (text: string) => {
+    info('Capitalizing first letter...')
+    debug(`Received value is ${text}`)
+    return text[0].toUpperCase() + text.slice(1)
+  }
 
   return {
     capitalizeFirstLetter

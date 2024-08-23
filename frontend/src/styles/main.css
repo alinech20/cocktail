@@ -33,3 +33,8 @@ p {
     font-size: var(--recipe-page-subtitle-size);
   }
 }
+
+.error {
+  background-color: var(--error);
+  color: var(--text-on-error)
+}

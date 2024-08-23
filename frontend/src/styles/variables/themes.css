@@ -12,6 +12,8 @@
   --quaternary-color: #F2C200;
   --text-primary: var(--primary-color);
   --text-on-primary: var(--white);
+  --error: #BB3212;
+  --text-on-error: var(--white);
 }
 
 .dark {

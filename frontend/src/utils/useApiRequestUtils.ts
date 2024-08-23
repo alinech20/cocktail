@@ -2,10 +2,10 @@ import { useLogger } from '@/composables/useLogger'
 import type { IApiPath } from '@/types/api'
 
 export const useApiRequestUtils = () => {
-  const { debug } = useLogger()
+  const { info, debug } = useLogger()
 
   function replaceEndpointPlaceholders({ url, params }: IApiPath) {
-    debug('Replacing endpoint placeholders')
+    info('Replacing endpoint placeholders...')
     debug(`url: ${url}`)
     debug(`params: ${JSON.stringify(params)}`)
 
@@ -22,7 +22,7 @@ export const useApiRequestUtils = () => {
   }
 
   function addQueryParams({ url, query }: IApiPath) {
-    debug('Adding query params')
+    info('Adding query params...')
     debug(`url: ${url}`)
     debug(`query: ${JSON.stringify(query)}`)
 
@@ -36,7 +36,7 @@ export const useApiRequestUtils = () => {
 
       // @ts-expect-error
       if (Array.isArray(query[key])) {
-        debug('Key has array value')
+        info('Key has array value')
         // @ts-expect-error
         const count = query[key].length
 
@@ -49,7 +49,7 @@ export const useApiRequestUtils = () => {
           if (i < count - 1) queryString += `&${key}=`
         }
       } else {
-        debug('Key has one value')
+        info('Key has one value')
         // @ts-expect-error
         const val = query[key]
         debug(`Value: ${val}`)

@@ -12,3 +12,9 @@ export const RECIPE_PAGE_SIZE = 10
 export const PINIA_STORE_KEYS = {
   RECIPE: 'Recipe'
 }
+
+export const SNACKBAR_DURATION = 5000
+
+export const BUS_EVENTS = {
+  SNACKBAR: 'bus-events:snackbar'
+}
