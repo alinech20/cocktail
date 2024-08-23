@@ -19,7 +19,7 @@ export const useRecipeStore = defineStore(PINIA_STORE_KEYS.RECIPE, () => {
     debug(`Received params are ${refresh} and ${addPage}`)
 
     searchTerm.value.trim()
-    if (!searchTerm.value) {
+    if (!searchTerm.value && recipes.value.length) {
       info('No search term available, returning all recipes')
       filteredRecipes.value = recipes.value
       return
