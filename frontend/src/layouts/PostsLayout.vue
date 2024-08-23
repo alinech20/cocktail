@@ -17,9 +17,6 @@
 </template>
 
 <style lang="scss">
-@import '../styles/variables/sizes.css';
-@import '../styles/variables/spacing.css';
-
 .header {
   height: var(--posts-header-height);
   width: var(--posts-header-width);

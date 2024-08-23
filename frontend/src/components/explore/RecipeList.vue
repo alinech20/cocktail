@@ -21,6 +21,7 @@ useInfiniteScroll(recipesContainer, async () => await loadNextPage(), {
 </script>
 
 <template>
+  <h2>Recipe List</h2>
   <section class="recipes-container" v-if="filteredRecipes.length > 0" ref="recipesContainer">
     <RecipeCard
       v-for="recipe in filteredRecipes"
@@ -35,7 +36,7 @@ useInfiniteScroll(recipesContainer, async () => await loadNextPage(), {
 <style lang="scss">
 .recipes-container {
   overflow-y: auto;
-  height: calc(100vh - 84px);
-  height: calc(100dvh - 84px);
+  height: calc(100vh - 126px);
+  height: calc(100dvh - 126px);
 }
 </style>

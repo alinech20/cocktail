@@ -22,9 +22,6 @@ const { capitalizeFirstLetter } = useTextFormatter()
 </template>
 
 <style lang="css">
-@import '../styles/variables/sizes.css';
-@import '../styles/variables/themes.css';
-
 .route-item--active {
   color: var(--white);
 }

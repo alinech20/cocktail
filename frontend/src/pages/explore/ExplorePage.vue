@@ -12,15 +12,15 @@ onBeforeMount(() => {
 <template>
   <section>
     <SearchRecipe />
-    <hr class="separator" />
+    <!-- <hr class="separator" /> -->
     <RecipeList />
   </section>
 </template>
 
 <style lang="scss">
-@import '../../styles/variables/spacing.css';
-
 .separator {
   margin: var(--small-item-spacer) 0;
+  border-color: var(--primary-color);
+  border-style: solid;
 }
 </style>

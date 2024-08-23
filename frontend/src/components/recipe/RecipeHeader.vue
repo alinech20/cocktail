@@ -25,9 +25,6 @@ const prefix = computed(() => {
 </template>
 
 <style lang="scss">
-@import '../../styles/variables/spacing.css';
-@import '../../styles/variables/sizes.css';
-
 .recipe-header {
   margin: calc(-1 * var(--main-content-padding));
 

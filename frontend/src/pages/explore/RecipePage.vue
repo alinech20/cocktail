@@ -34,8 +34,6 @@ onBeforeMount(() => {
 </template>
 
 <style lang="scss">
-@import '../../styles/variables/spacing.css';
-
 .recipe__details {
   padding: 0 var(--large-item-spacer);
 }

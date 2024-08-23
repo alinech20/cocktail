@@ -42,14 +42,13 @@ const getResizedPhoto = (photo: string) => {
 </template>
 
 <style lang="scss">
-@import '../../styles/variables/themes.css';
-@import '../../styles/variables/sizes.css';
-@import '../../styles/variables/spacing.css';
-
 .recipe-card {
   display: flex;
   height: var(--recipe-card-height);
   margin: var(--small-item-spacer) 0;
+  background-color: var(--primary-color);
+  color: var(--text-on-primary);
+  border-radius: var(--recipe-card-border-radius);
 
   &:first-of-type {
     margin-top: 0;
@@ -63,6 +62,8 @@ const getResizedPhoto = (photo: string) => {
     flex: 0 0 120px;
     background-position: top;
     background-size: cover;
+    border-top-left-radius: var(--recipe-card-border-radius);
+    border-bottom-left-radius: var(--recipe-card-border-radius);
   }
 
   &__details {

@@ -8,10 +8,16 @@
 .tropical-fun {
   --primary-color: #FF6B6B;
   --secondary-color: #2AC1B5;
-  --tertiary-color: #41A317;
+  --tertiary-color: #73c152;
   --quaternary-color: #F2C200;
   --text-primary: var(--primary-color);
   --text-on-primary: var(--white);
+  --text-secondary: var(--secondary-color);
+  --text-on-secondary: var(--white);
+  --text-tertiary: var(--tertiary-color);
+  --text-on-tertiary: var(--white);
+  --text-quaternary: var(--quaternary-color);
+  --text-on-quaternary: var(--white);
   --error: #BB3212;
   --text-on-error: var(--white);
 }

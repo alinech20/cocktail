@@ -24,7 +24,6 @@ p {
 }
 
 .custom-input {
-  border-radius: var(--custom-input-border-radius);
   padding: var(--custom-input-padding);
 }
 

@@ -37,9 +37,6 @@ onMounted(() => {
 </template>
 
 <style lang="scss">
-@import '../../styles/variables/sizes.css';
-@import '../../styles/variables/spacing.css';
-
 .notification-snackbar {
   position: absolute;
   border-radius: var(--custom-input-border-radius);

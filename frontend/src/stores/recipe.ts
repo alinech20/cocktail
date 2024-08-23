@@ -7,7 +7,7 @@ import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 
 export const useRecipeStore = defineStore(PINIA_STORE_KEYS.RECIPE, () => {
-  const { info, error: logError } = useLogger()
+  const { info, debug, error: logError } = useLogger()
   const currentPage = computed(() => Math.ceil(filteredRecipes.value.length / RECIPE_PAGE_SIZE))
   const lastPage = ref(false)
 
@@ -15,10 +15,18 @@ export const useRecipeStore = defineStore(PINIA_STORE_KEYS.RECIPE, () => {
   const filteredRecipes = ref<IRecipe[]>([])
   const filterRecipes = async (refresh = false, addPage = false) => {
     info('Fetching filtered recipes...')
+    debug(`Search term is "${searchTerm.value}"`)
+    debug(`Received params are ${refresh} and ${addPage}`)
 
-    if (!searchTerm.value && !refresh && !addPage) {
+    searchTerm.value.trim()
+    if (!searchTerm.value) {
       info('No search term available, returning all recipes')
       filteredRecipes.value = recipes.value
+      return
+    }
+
+    if (filteredRecipes.value.length !== recipes.value.length && !refresh && !addPage) {
+      info('Returning existing result')
       return
     }
 
