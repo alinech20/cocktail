@@ -3,7 +3,6 @@ import { useRecipeStore } from '@/stores/recipe'
 import InputWithButton from '../global/inputs/InputWithButton.vue'
 import { storeToRefs } from 'pinia'
 
-// @ts-expect-error
 import SearchIcon from '~icons/mdi/magnify'
 
 const recipeStore = useRecipeStore()
@@ -30,10 +29,12 @@ const searchRecipes = () => {
 <style lang="scss">
 .search-recipe {
   display: flex;
+  padding: var(--small-item-spacer);
 
   input {
-    border: 2px solid var(--quaternary-color);
-    color: var(--text-quaternary);
+    border: 2px solid var(--accent-color-2);
+    background-color: var(--background-color);
+    color: var(--text-main);
     font-weight: 600;
 
     &:focus {
@@ -42,9 +43,9 @@ const searchRecipes = () => {
   }
 
   button {
-    background-color: var(--quaternary-color);
-    color: var(--text-on-quaternary);
-    border: 2px solid var(--quaternary-color);
+    background-color: var(--accent-color-2);
+    color: var(--text-on-secondary);
+    border: 2px solid var(--accent-color-2);
   }
 }
 </style>

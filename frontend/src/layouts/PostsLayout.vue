@@ -1,5 +1,11 @@
+<script setup lang="ts">
+import { useScreenSize } from '@/composables/useScreenSize'
+
+const { hasDesktopScreen } = useScreenSize()
+</script>
+
 <template>
-  <header v-if="false" class="header">
+  <header v-if="hasDesktopScreen" class="header">
     <router-view class="posts-header" name="header" />
   </header>
   <aside class="sidebar-left">
@@ -20,12 +26,16 @@
 .header {
   height: var(--posts-header-height);
   width: var(--posts-header-width);
-  background-color: red;
-  position: sticky;
-}
 
-.content {
-  padding: var(--main-content-padding);
+  background-color: var(--white);
+  box-shadow: var(--slightest-shadow);
+
+  top: 0;
+  position: sticky;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .footer {
@@ -34,5 +44,12 @@
   background-color: red;
   position: fixed;
   bottom: 0;
+}
+
+@media only screen and (min-width: 1281px) {
+  .content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
 }
 </style>

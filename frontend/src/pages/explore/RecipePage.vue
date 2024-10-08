@@ -34,7 +34,14 @@ onBeforeMount(() => {
 </template>
 
 <style lang="scss">
-.recipe__details {
-  padding: 0 var(--large-item-spacer);
+.recipe {
+  h1,
+  h2 {
+    color: var(--text-primary);
+  }
+
+  &__details {
+    padding: 0 var(--large-item-spacer) var(--large-item-spacer);
+  }
 }
 </style>

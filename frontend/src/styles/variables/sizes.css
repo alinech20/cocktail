@@ -8,6 +8,7 @@
   --posts-footer-height: 60px;
   --posts-footer-width: 100vw;
   --footer-navigation-icon-size: 1.5rem;
+  --header-title-size: 2rem;
 
   /* recipes */
   --recipe-card-height: 120px;
@@ -15,6 +16,6 @@
   --recipe-page-subtitle-size: 1.125rem;
 
   /* others */
-  --custom-input-border-radius: 4px;
-  --recipe-card-border-radius: 8px;
+  --custom-input-border-radius: 8px;
+  --recipe-card-border-radius: 12px;
 }

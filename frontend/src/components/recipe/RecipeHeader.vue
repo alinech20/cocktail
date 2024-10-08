@@ -26,8 +26,6 @@ const prefix = computed(() => {
 
 <style lang="scss">
 .recipe-header {
-  margin: calc(-1 * var(--main-content-padding));
-
   &__image {
     width: 100%;
     max-height: 500px;

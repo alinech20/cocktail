@@ -1,6 +1,7 @@
 @import "./variables/sizes.css";
 @import "./variables/spacing.css";
-@import url("./variables/themes.css");
+@import "./variables/shadows.css";
+@import "./variables/themes.css";
 
 * {
   -webkit-font-smoothing: antialiased;
@@ -10,9 +11,10 @@ body {
   margin: 0;
   font-size: var(--root-font-size);
   line-height: var(--body-line-height);
-  color: var(--text-primary);
+  color: var(--text-main);
   font-family: var(--default-font);
   font-weight: var(--body-font-weight);
+  background-color: var(--background-color);
 }
 
 input, button {

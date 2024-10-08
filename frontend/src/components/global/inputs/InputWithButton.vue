@@ -3,6 +3,7 @@ import type { Component } from 'vue'
 
 defineProps<{
   action: () => void
+  placeholder: string
   buttonContent: string | Component
 }>()
 
@@ -11,7 +12,12 @@ const model = defineModel()
 
 <template>
   <article class="input-w-button" @keyup.enter="action">
-    <input class="custom-input input-w-button__input" v-model="model" type="text" />
+    <input
+      class="custom-input input-w-button__input"
+      v-model="model"
+      type="text"
+      :placeholder="placeholder"
+    />
     <button class="input-w-button__button" @click="action">
       <span v-if="typeof buttonContent === 'string'">
         {{ buttonContent }}

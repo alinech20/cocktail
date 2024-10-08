@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import type { IRecipe } from '@/types/recipes'
 import { computed } from 'vue'
+import { router } from '@/router'
 
 const props = defineProps<{
   recipe: IRecipe
 }>()
+
+const goToRecipe = (id: number) => router.push({ path: `/recipes/${id}` })
 
 const ingredientsSummary = computed(() => {
   const ingString = props.recipe.ingredients
@@ -29,9 +32,10 @@ const getResizedPhoto = (photo: string) => {
     <section
       class="recipe-card__image-wrapper"
       :style="`background-image: url(${getResizedPhoto(recipe.photo || 'https://placehold.co/120x120')});`"
+      @click="goToRecipe(recipe.id!)"
     ></section>
     <section class="recipe-card__details">
-      <h2 class="recipe-card__title">
+      <h2 class="recipe-card__title" @click="goToRecipe(recipe.id!)">
         {{ recipe.title }}
       </h2>
       <p class="recipe-card__ingredients-summary">
@@ -46,24 +50,19 @@ const getResizedPhoto = (photo: string) => {
   display: flex;
   height: var(--recipe-card-height);
   margin: var(--small-item-spacer) 0;
-  background-color: var(--primary-color);
-  color: var(--text-on-primary);
-  border-radius: var(--recipe-card-border-radius);
+  color: var(--primary-color);
 
   &:first-of-type {
     margin-top: 0;
-  }
-
-  &:last-of-type {
-    margin-bottom: 0;
   }
 
   &__image-wrapper {
     flex: 0 0 120px;
     background-position: top;
     background-size: cover;
-    border-top-left-radius: var(--recipe-card-border-radius);
-    border-bottom-left-radius: var(--recipe-card-border-radius);
+    border-top-right-radius: var(--recipe-card-border-radius);
+    border-bottom-right-radius: var(--recipe-card-border-radius);
+    box-shadow: var(--slight-elevate-shadow);
   }
 
   &__details {
@@ -77,6 +76,7 @@ const getResizedPhoto = (photo: string) => {
 
   &__ingredients-summary {
     line-height: var(--tight-line-height);
+    color: var(--text-main);
     opacity: var(--faded-text);
   }
 }
