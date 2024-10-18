@@ -25,3 +25,14 @@ useInfiniteScroll(recipesContainer, async () => await loadNextPage(), {
   </section>
   <h3 v-else class="no-results">There are no recipes matching your search :(</h3>
 </template>
+
+<style lang="scss">
+.recipes-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  overflow-y: auto;
+  height: calc(100vh - 62px);
+  height: calc(100dvh - 62px);
+}
+</style>

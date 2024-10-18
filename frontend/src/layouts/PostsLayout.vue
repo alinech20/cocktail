@@ -5,7 +5,7 @@ const { hasDesktopScreen } = useScreenSize()
 </script>
 
 <template>
-  <header v-if="hasDesktopScreen" class="header">
+  <header v-if="false" class="header">
     <router-view class="posts-header" name="header" />
   </header>
   <aside class="sidebar-left">
@@ -38,6 +38,10 @@ const { hasDesktopScreen } = useScreenSize()
   justify-content: center;
 }
 
+.content {
+  background-color: var(--background-color);
+}
+
 .footer {
   height: var(--posts-footer-height);
   width: var(--posts-footer-width);
@@ -48,8 +52,8 @@ const { hasDesktopScreen } = useScreenSize()
 
 @media only screen and (min-width: 1281px) {
   .content {
-    max-width: 800px;
-    margin: 0 auto;
+    // max-width: 1024px;
+    // margin: 0 auto;
   }
 }
 </style>

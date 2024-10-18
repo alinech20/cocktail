@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import RecipeHeader from '@/components/recipe/RecipeHeader.vue'
+import RecipeHeader from '@/components/recipe/RecipeImage.vue'
 import RecipeIngredients from '@/components/recipe/RecipeIngredients.vue'
 import RecipeSteps from '@/components/recipe/RecipeSteps.vue'
 import { useRecipeStore } from '@/stores/recipe'
 import { storeToRefs } from 'pinia'
-import { onBeforeMount } from 'vue'
+import { onBeforeMount, computed } from 'vue'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
@@ -14,6 +14,15 @@ const recipeStore = useRecipeStore()
 const { currentRecipe } = storeToRefs(recipeStore)
 const { setCurrentRecipe } = recipeStore
 
+const prefix = computed(() => {
+  const vowels = ['a', 'e', 'i', 'o', 'u']
+
+  if (!currentRecipe.value?.title) return 'a'
+  if (vowels.includes(currentRecipe.value.title.charAt(0).toLowerCase())) return 'an'
+
+  return 'a'
+})
+
 onBeforeMount(() => {
   setCurrentRecipe(recipeId)
   // recipeStore.fetchRecipeById(recipeId)
@@ -22,8 +31,9 @@ onBeforeMount(() => {
 
 <template>
   <section class="recipe">
-    <RecipeHeader :title="currentRecipe?.title" :image="currentRecipe?.photo" />
+    <RecipeHeader :image="currentRecipe?.photo" />
     <section class="recipe__details">
+      <h1 class="recipe__title">How to make {{ prefix }} {{ currentRecipe?.title }} cocktail</h1>
       <p v-if="currentRecipe?.note">
         {{ currentRecipe.note }}
       </p>
@@ -41,7 +51,16 @@ onBeforeMount(() => {
   }
 
   &__details {
+    max-width: 960px;
+    margin: 0 auto;
     padding: 0 var(--large-item-spacer) var(--large-item-spacer);
+  }
+
+  &__title {
+    text-align: center;
+    font-size: var(--recipe-page-title-size);
+    margin-left: var(--medium-item-spacer);
+    margin-right: var(--medium-item-spacer);
   }
 }
 </style>

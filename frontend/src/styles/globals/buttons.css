@@ -1,0 +1,8 @@
+.btn--tight {
+  padding: var(--tiny-item-spacer) var(--small-item-spacer);
+}
+
+.btn--primary {
+  background-color: var(--primary-color);
+  color: var(--text-on-primary);
+}

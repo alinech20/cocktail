@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { Component } from 'vue'
+import CustomButton from './CustomButton.vue'
 
 defineProps<{
   action: () => void
@@ -18,16 +19,11 @@ const model = defineModel()
       type="text"
       :placeholder="placeholder"
     />
-    <button class="input-w-button__button" @click="action">
-      <span v-if="typeof buttonContent === 'string'">
-        {{ buttonContent }}
-      </span>
-      <component v-else class="button__icon" :is="buttonContent"></component>
-    </button>
+    <CustomButton class="input-w-button__button" @click="action" :buttonContent="buttonContent" />
   </article>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .input-w-button {
   display: flex;
   width: 100%;
@@ -45,7 +41,7 @@ const model = defineModel()
     border-left: none;
 
     .button__icon {
-      font-size: 1.5rem;
+      font-size: 1.25rem;
     }
   }
 }

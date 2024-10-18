@@ -23,11 +23,4 @@ onBeforeMount(() => {
   border-color: var(--primary-color);
   border-style: solid;
 }
-
-.recipes-container {
-  margin-left: calc(-1 * var(--small-item-spacer));
-  overflow-y: auto;
-  height: calc(100vh - 62px);
-  height: calc(100dvh - 62px);
-}
 </style>

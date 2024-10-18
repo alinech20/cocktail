@@ -10,8 +10,11 @@
   --footer-navigation-icon-size: 1.5rem;
   --header-title-size: 2rem;
 
+  /* buttons  */
+  --button-border-radius: 4px;
+
   /* recipes */
-  --recipe-card-height: 120px;
+  --recipe-card-width: 300px;
   --recipe-page-title-size: 1.375rem;
   --recipe-page-subtitle-size: 1.125rem;
 

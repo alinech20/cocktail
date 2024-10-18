@@ -28,12 +28,16 @@ const searchRecipes = () => {
 
 <style lang="scss">
 .search-recipe {
-  display: flex;
+  position: relative;
   padding: var(--small-item-spacer);
+  background-color: var(--white);
+  box-shadow: var(--slightest-shadow);
 
   input {
-    border: 2px solid var(--accent-color-2);
-    background-color: var(--background-color);
+    border: none;
+    border-bottom: 2px solid var(--accent-color-2);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
     color: var(--text-main);
     font-weight: 600;
 
@@ -44,8 +48,9 @@ const searchRecipes = () => {
 
   button {
     background-color: var(--accent-color-2);
-    color: var(--text-on-secondary);
+    color: var(--text-on-primary);
     border: 2px solid var(--accent-color-2);
+    border-bottom-right-radius: 0;
   }
 }
 </style>

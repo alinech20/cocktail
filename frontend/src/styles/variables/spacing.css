@@ -1,5 +1,6 @@
 :root {
   /* general spacers */
+  --tiny-item-spacer: 6px;
   --small-item-spacer: 10px;
   --medium-item-spacer: 20px;
   --large-item-spacer: 40px;
