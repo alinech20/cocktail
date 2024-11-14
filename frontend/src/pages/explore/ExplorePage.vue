@@ -2,7 +2,6 @@
 import { onBeforeMount } from 'vue'
 import { useRecipeStore } from '@/stores/recipe'
 import RecipeList from '@/components/explore/RecipeList.vue'
-import SearchRecipe from '@/components/explore/SearchRecipe.vue'
 
 onBeforeMount(() => {
   useRecipeStore().fetchRecipes()
@@ -11,16 +10,14 @@ onBeforeMount(() => {
 
 <template>
   <section>
-    <SearchRecipe />
-    <!-- <hr class="separator" /> -->
-    <RecipeList />
+    <h2 v-if="false">Recipe List</h2>
+    <RecipeList class="recipe-list" />
   </section>
 </template>
 
 <style lang="scss">
-.separator {
-  margin: var(--small-item-spacer) 0;
-  border-color: var(--primary-color);
-  border-style: solid;
+.recipe-list {
+  max-width: var(--max-content-width);
+  margin: 0 auto;
 }
 </style>

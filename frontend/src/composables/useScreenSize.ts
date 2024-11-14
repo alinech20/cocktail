@@ -3,9 +3,15 @@ import { computed } from 'vue'
 
 export const useScreenSize = () => {
   const { width } = useWindowSize()
-  const hasDesktopScreen = computed(() => width.value > 1280)
+  const hasPhoneScreen = computed(() => width.value <= 768)
+  const hasTabletScreen = computed(() => width.value > 768)
+  const hasLaptopScreen = computed(() => width.value > 1024)
+  const hasLargeScreen = computed(() => width.value > 1280)
 
   return {
-    hasDesktopScreen
+    hasPhoneScreen,
+    hasTabletScreen,
+    hasLaptopScreen,
+    hasLargeScreen
   }
 }

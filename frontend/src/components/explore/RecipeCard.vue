@@ -61,7 +61,13 @@ const getResizedPhoto = (photo: string) => {
 <style lang="scss">
 .recipe-card {
   width: var(--recipe-card-width);
-  margin: var(--medium-item-spacer) 0;
+  margin: var(--small-item-spacer) 0;
+
+  // --tablet-screen
+  @media only screen and (min-width: 769px) {
+    margin: var(--medium-item-spacer);
+  }
+
   border-radius: var(--recipe-card-border-radius);
   box-shadow: var(--slight-shadow);
   background-color: var(--white);
@@ -69,13 +75,21 @@ const getResizedPhoto = (photo: string) => {
   &__header {
     position: relative;
     height: calc(var(--recipe-card-width) / 2);
+
     background-size: cover;
     background-position: center;
+
     border-top-left-radius: var(--recipe-card-border-radius);
     border-top-right-radius: var(--recipe-card-border-radius);
   }
 
   &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    // height is 100% - image area - vertical padding
+    height: calc(100% - calc(var(--recipe-card-width) / 2) - calc(2 * var(--small-item-spacer)));
     padding: var(--small-item-spacer) var(--medium-item-spacer);
     border-bottom-left-radius: var(--recipe-card-border-radius);
     border-bottom-right-radius: var(--recipe-card-border-radius);

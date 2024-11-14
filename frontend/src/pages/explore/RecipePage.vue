@@ -53,7 +53,7 @@ onBeforeMount(() => {
   &__details {
     max-width: 960px;
     margin: 0 auto;
-    padding: 0 var(--large-item-spacer) var(--large-item-spacer);
+    padding: var(--large-item-spacer);
   }
 
   &__title {

@@ -40,3 +40,9 @@ const orderedIngredients = computed(() => {
     </ul>
   </section>
 </template>
+
+<style lang="scss">
+.recipe-ingredients {
+  padding-top: var(--small-item-spacer);
+}
+</style>

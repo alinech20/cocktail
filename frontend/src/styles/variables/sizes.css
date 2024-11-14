@@ -21,4 +21,12 @@
   /* others */
   --custom-input-border-radius: 8px;
   --recipe-card-border-radius: 12px;
+
+  /* screen sizes breakpoints */
+  --tablet-screen: 768px;
+  --laptop-screen: 1024px;
+  --large-screen: 1280px;
+
+  /* maximum content width */
+  --max-content-width: 1440px;
 }

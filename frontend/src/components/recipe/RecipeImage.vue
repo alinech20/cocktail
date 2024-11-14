@@ -8,7 +8,9 @@ defineProps<{
 
 <template>
   <article class="recipe-header" :style="`background-image: url(${image});`">
-    <img class="recipe-header__image" :src="image || 'https://placehold.co/200x200'" />
+    <section class="recipe-header__overlay">
+      <img class="recipe-header__image" :src="image || 'https://placehold.co/200x200'" />
+    </section>
   </article>
 </template>
 
@@ -16,12 +18,17 @@ defineProps<{
 .recipe-header {
   background-size: cover;
   background-position: center;
-  background-color: rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(200px);
-  width: 100%;
+
+  &__overlay {
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+  }
 
   &__image {
     display: block;
+    width: 100%;
     max-width: 500px;
     margin: 0 auto;
   }

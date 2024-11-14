@@ -1,6 +1,8 @@
-export interface IApiParams {
+export interface IRecipeApiParams {
   recipeId?: number
 }
+
+type TApiParams = IRecipeApiParams
 
 export interface IRecipeApiQueryParams {
   name?: string
@@ -8,8 +10,10 @@ export interface IRecipeApiQueryParams {
   size?: number
 }
 
+type TApiQueryParams = IRecipeApiQueryParams
+
 export interface IApiPath {
   url: string
-  params?: IApiParams
-  query?: IRecipeApiQueryParams
+  params?: TApiParams
+  query?: TApiQueryParams
 }

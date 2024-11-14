@@ -11,8 +11,20 @@ export const useRecipeStore = defineStore(PINIA_STORE_KEYS.RECIPE, () => {
   const currentPage = computed(() => Math.ceil(filteredRecipes.value.length / RECIPE_PAGE_SIZE))
   const lastPage = ref(false)
 
+  // SEARCH FEATURE
+  // search term
   const searchTerm = ref<string>('')
+
+  // list of filtered recipes fetched from api
   const filteredRecipes = ref<IRecipe[]>([])
+
+  /**
+   * Fetches the recipes from the db that are matching the filter
+   *
+   * @param refresh Forces a refetch even if we have a previous result available
+   * @param addPage
+   * @returns
+   */
   const filterRecipes = async (refresh = false, addPage = false) => {
     info('Fetching filtered recipes...')
     debug(`Search term is "${searchTerm.value}"`)

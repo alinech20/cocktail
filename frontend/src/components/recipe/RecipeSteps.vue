@@ -22,3 +22,9 @@ const orderedSteps = computed<IRecipeStep[]>(() =>
     </ol>
   </section>
 </template>
+
+<style lang="scss">
+.recipe-steps {
+  padding-top: var(--small-item-spacer);
+}
+</style>

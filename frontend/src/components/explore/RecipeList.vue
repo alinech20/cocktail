@@ -19,11 +19,12 @@ useInfiniteScroll(recipesContainer, async () => await loadNextPage(), {
 </script>
 
 <template>
-  <h2 v-if="false">Recipe List</h2>
-  <section class="recipes-container" v-if="filteredRecipes.length > 0" ref="recipesContainer">
-    <RecipeCard v-for="recipe in filteredRecipes" :key="recipe.id" :recipe="recipe" />
-  </section>
-  <h3 v-else class="no-results">There are no recipes matching your search :(</h3>
+  <div>
+    <section class="recipes-container" v-if="filteredRecipes.length > 0" ref="recipesContainer">
+      <RecipeCard v-for="recipe in filteredRecipes" :key="recipe.id" :recipe="recipe" />
+    </section>
+    <h3 v-else class="no-results">There are no recipes matching your search :(</h3>
+  </div>
 </template>
 
 <style lang="scss">
@@ -31,8 +32,16 @@ useInfiniteScroll(recipesContainer, async () => await loadNextPage(), {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  overflow-y: auto;
-  height: calc(100vh - 62px);
-  height: calc(100dvh - 62px);
+
+  padding: var(--small-item-spacer) 0;
+  height: calc(100vh - 80px);
+  height: calc(100dvh - 80px);
+
+  // --tablet-screen
+  @media only screen and (min-width: 768px) {
+    // to account for larger .recipe-card vertical margin
+    height: calc(100vh - 100px);
+    height: calc(100dvh - 100px);
+  }
 }
 </style>

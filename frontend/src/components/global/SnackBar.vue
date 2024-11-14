@@ -39,10 +39,11 @@ onMounted(() => {
 <style lang="scss">
 .notification-snackbar {
   position: absolute;
-  border-radius: var(--custom-input-border-radius);
   bottom: var(--small-item-spacer);
   left: var(--small-item-spacer);
   right: var(--small-item-spacer);
+
+  border-radius: var(--custom-input-border-radius);
   padding: var(--medium-item-spacer);
 }
 </style>
