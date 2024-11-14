@@ -18,3 +18,7 @@ export const SNACKBAR_DURATION = 5000
 export const BUS_EVENTS = {
   SNACKBAR: 'bus-events:snackbar'
 }
+
+export const CONSTANTS = {
+  RECIPE_PAGE_IMAGE_MAX_WIDTH: 500
+}

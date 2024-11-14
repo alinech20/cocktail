@@ -10,6 +10,7 @@ export const useRecipeStore = defineStore(PINIA_STORE_KEYS.RECIPE, () => {
   const { info, debug, error: logError } = useLogger()
   const currentPage = computed(() => Math.ceil(filteredRecipes.value.length / RECIPE_PAGE_SIZE))
   const lastPage = ref(false)
+  const isFetching = ref(false)
 
   // SEARCH FEATURE
   // search term
@@ -43,6 +44,7 @@ export const useRecipeStore = defineStore(PINIA_STORE_KEYS.RECIPE, () => {
     }
 
     if (!addPage) filteredRecipes.value.length = 0
+    isFetching.value = true
 
     const apiRequest = useApiRequest({
       url: API.RECIPES.FILTER,
@@ -63,6 +65,8 @@ export const useRecipeStore = defineStore(PINIA_STORE_KEYS.RECIPE, () => {
       if (currentPage.value !== filteredRecipes.value.length / RECIPE_PAGE_SIZE)
         lastPage.value = true
 
+      isFetching.value = false
+
       info('Recipes filtered successfully!')
     })
     onFetchError(() => logError(error.value))
@@ -78,6 +82,7 @@ export const useRecipeStore = defineStore(PINIA_STORE_KEYS.RECIPE, () => {
     }
 
     if (!addPage) recipes.value.length = 0
+    isFetching.value = true
 
     const apiRequest = useApiRequest({
       url: API.RECIPES.ALL,
@@ -99,6 +104,8 @@ export const useRecipeStore = defineStore(PINIA_STORE_KEYS.RECIPE, () => {
       if (currentPage.value !== filteredRecipes.value.length / RECIPE_PAGE_SIZE)
         lastPage.value = true
 
+      isFetching.value = false
+
       info('Recipes fetched successfully!')
     })
     onFetchError(() => logError(error.value))
@@ -106,6 +113,11 @@ export const useRecipeStore = defineStore(PINIA_STORE_KEYS.RECIPE, () => {
 
   const loadNextPage = async () => {
     info('Getting next page of recipes...')
+    if (isFetching.value) {
+      info('Still fetching the previous slice...')
+      return
+    }
+
     if (lastPage.value) {
       info('Already on the last page')
       return

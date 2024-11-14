@@ -1,14 +1,39 @@
 <script setup lang="ts">
+import { useScreenSize } from '@/composables/useScreenSize'
+import { CONSTANTS } from '@/constants'
 import type { TNullableOptional } from '@/types/helpers'
+import { computed } from 'vue'
 
 defineProps<{
   image: TNullableOptional<string>
 }>()
+
+const { width } = useScreenSize()
+const imageMaxSize = CONSTANTS.RECIPE_PAGE_IMAGE_MAX_WIDTH
+const overlaySize = computed(() => {
+  return width.value > imageMaxSize
+    ? {
+        w: width.value,
+        h: (imageMaxSize * 4) / 3
+      }
+    : {
+        w: 'auto',
+        h: 'auto'
+      }
+})
 </script>
 
 <template>
-  <article class="recipe-header" :style="`background-image: url(${image});`">
-    <section class="recipe-header__overlay">
+  <article
+    class="recipe-header"
+    :style="width > imageMaxSize ? `background-image: url(${image});` : ''"
+  >
+    <section
+      class="recipe-header__overlay"
+      :style="
+        width > imageMaxSize ? `min-width: ${overlaySize.w}px; min-height: ${overlaySize.h}px;` : ''
+      "
+    >
       <img class="recipe-header__image" :src="image || 'https://placehold.co/200x200'" />
     </section>
   </article>

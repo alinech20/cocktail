@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import RecipeHeader from '@/components/recipe/RecipeImage.vue'
+import RecipeImage from '@/components/recipe/RecipeImage.vue'
 import RecipeIngredients from '@/components/recipe/RecipeIngredients.vue'
 import RecipeSteps from '@/components/recipe/RecipeSteps.vue'
 import { useRecipeStore } from '@/stores/recipe'
@@ -31,7 +31,7 @@ onBeforeMount(() => {
 
 <template>
   <section class="recipe">
-    <RecipeHeader :image="currentRecipe?.photo" />
+    <RecipeImage :image="currentRecipe?.photo" />
     <section class="recipe__details">
       <h1 class="recipe__title">How to make {{ prefix }} {{ currentRecipe?.title }} cocktail</h1>
       <p v-if="currentRecipe?.note">

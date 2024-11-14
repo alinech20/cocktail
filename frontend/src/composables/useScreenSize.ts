@@ -9,6 +9,7 @@ export const useScreenSize = () => {
   const hasLargeScreen = computed(() => width.value > 1280)
 
   return {
+    width,
     hasPhoneScreen,
     hasTabletScreen,
     hasLaptopScreen,
