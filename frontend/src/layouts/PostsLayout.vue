@@ -1,5 +1,26 @@
+<script setup lang="ts">
+import { useWindowScroll } from '@vueuse/core'
+import { ref } from 'vue'
+
+const headerRef = ref<HTMLElement | undefined>()
+const headerHeight = 60
+const { y: scrollY } = useWindowScroll()
+let prevScrollY = scrollY.value
+
+window.onscroll = () => {
+  if (!headerRef.value) return
+
+  if (scrollY.value < headerHeight) return (headerRef.value.style.top = '0px')
+
+  if (scrollY.value > prevScrollY) headerRef.value.style.top = `-${headerHeight}px`
+  else headerRef.value.style.top = '0px'
+
+  prevScrollY = scrollY.value
+}
+</script>
+
 <template>
-  <header class="header">
+  <header class="header" ref="headerRef">
     <router-view class="posts-header" name="header" />
   </header>
   <aside class="sidebar-left">
@@ -26,10 +47,13 @@
 
   top: 0;
   position: sticky;
+  transition: top 0.3s ease-in;
 
   display: flex;
   align-items: center;
   justify-content: center;
+
+  z-index: var(--header-z-index);
 
   .posts-header {
     width: 100%;
