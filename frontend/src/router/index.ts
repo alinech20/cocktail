@@ -1,10 +1,9 @@
-import PostsFooter from '@/components/layouts/posts/PostsFooter.vue'
-import PostsHeader from '@/components/layouts/posts/PostsHeader.vue'
 import PostsLayout from '@/layouts/PostsLayout.vue'
 import ExplorePage from '@/pages/explore/ExplorePage.vue'
 import RecipePage from '@/pages/explore/RecipePage.vue'
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
 import ExploreIcon from '~icons/mdi/glass-cocktail'
+import { defaultLayout } from './layout/default'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -15,9 +14,8 @@ const routes: RouteRecordRaw[] = [
         path: '',
         name: 'explore',
         components: {
-          main: ExplorePage,
-          header: PostsHeader,
-          footer: PostsFooter
+          ...defaultLayout,
+          main: ExplorePage
         },
         meta: {
           footerRoute: true,
@@ -34,7 +32,11 @@ const routes: RouteRecordRaw[] = [
         path: '',
         name: 'recipe',
         components: {
+          ...defaultLayout,
           main: RecipePage
+        },
+        meta: {
+          header: false
         }
       }
     ]

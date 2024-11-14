@@ -1,6 +1,9 @@
 <script setup lang="ts">
+import { router } from '@/router'
 import { useWindowScroll } from '@vueuse/core'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
+
+const hideHeader = computed(() => router.currentRoute.value.meta.header === false)
 
 const headerRef = ref<HTMLElement | undefined>()
 const headerHeight = 60
@@ -20,7 +23,7 @@ window.onscroll = () => {
 </script>
 
 <template>
-  <header class="header" ref="headerRef">
+  <header v-show="!hideHeader" class="header" ref="headerRef">
     <router-view class="posts-header" name="header" />
   </header>
   <aside class="sidebar-left">
