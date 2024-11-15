@@ -1,0 +1,56 @@
+:root {
+  --faded-text: 0.8; /* use this for opacity on texts to create a secondary, dimmed text */
+  --default-font: "Raleway", sans-serif;
+  --white: #fff;
+  --body-font-weight: 500;
+}
+
+.tropical-fun--old {
+  --primary-color: #ff6b6b;
+  --secondary-color: #2ac1b5;
+  --tertiary-color: #73c152;
+  --quaternary-color: #f2c200;
+
+  --text-primary: var(--primary-color);
+  --text-on-primary: var(--white);
+  --text-secondary: var(--secondary-color);
+  --text-on-secondary: var(--white);
+  --text-tertiary: var(--tertiary-color);
+  --text-on-tertiary: var(--white);
+  --text-quaternary: var(--quaternary-color);
+  --text-on-quaternary: var(--white);
+
+  --error: #BB3212;
+  --text-on-error: var(--white);
+
+  --primary-bg-lightest: #fff0f0; /* primary 10% */
+  --secondary-bg-lightest: #eaf9f8; /* secondary 10% */
+  --tertiary-bg-lightest: #f1f9ee; /* tertiary 10% */
+  --quaternary-bg-lightest: #fef9e6; /* quaternary 10% */
+}
+
+.tropical-fun {
+  --primary-color: #FF7F50;
+  --secondary-color: #FFD93D;
+  --accent-color-1: #6BCB77;
+  --accent-color-2: #C3B1E1;
+
+  --text-primary: var(--primary-color);
+  --text-on-primary: var(--white);
+  --text-secondary: var(--secondary-color);
+  --text-on-secondary: var(--white);
+  --text-accent-1: var(--accent-color-1);
+  --text-on-accent-1: var(--white);
+  --text-accent-2: var(--accent-color-2);
+  --text-on-accent-2: var(--white);
+
+  --error: #BB3212;
+  --text-on-error: var(--white);
+
+  --background-color: #FFF5E1;
+  --text-main: #333333;
+}
+
+.dark {
+  /* TODO */
+}

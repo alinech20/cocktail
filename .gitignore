@@ -1,4 +1,8 @@
 docker/secrets
+docker/.DS_Store
 backend/.env
 backend/.venv
 **/__pycache__
+.DS_Store
+screenshots
+TODO

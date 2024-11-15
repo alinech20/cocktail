@@ -27,9 +27,9 @@ class IngredientCategory(Base):
   name: Mapped[str] = mapped_column(String(16))
 
   created_at: Mapped[datetime] = mapped_column(server_default=func.current_timestamp())
-  modified_at: Mapped[datetime] = mapped_column(server_default=func.current_timestamp())
+  modified_at: Mapped[datetime] = mapped_column(onupdate=func.current_timestamp())
 
-  ingredients: Mapped[List["Ingredient"]] = relationship(back_populates="category")
+  # ingredients: Mapped[List["Ingredient"]] = relationship(back_populates="category", lazy="joined")
 
 class Ingredient(Base):
   __tablename__ = "ingredients"
@@ -37,13 +37,11 @@ class Ingredient(Base):
 
   id: Mapped[int] = mapped_column(primary_key=True)
   category_id: Mapped[int] = mapped_column(ForeignKey("ingredients.categories.id"))
-  name: Mapped[Optional[str]] = mapped_column(String(32))
+  name: Mapped[str] = mapped_column(String(32))
   photo: Mapped[Optional[str]] = mapped_column(String(256))
   alternative: Mapped[Optional[str]] = mapped_column(String(512))
 
   created_at: Mapped[datetime] = mapped_column(server_default=func.current_timestamp())
-  modified_at: Mapped[datetime] = mapped_column(server_default=func.current_timestamp())
+  modified_at: Mapped[datetime] = mapped_column(onupdate=func.current_timestamp())
 
-  category: Mapped["IngredientCategory"] = relationship(back_populates="ingredients")
-
-
+  category: Mapped["IngredientCategory"] = relationship(lazy="joined")

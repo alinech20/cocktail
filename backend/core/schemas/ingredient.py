@@ -13,7 +13,7 @@ class IngredientUnit(IngredientUnitBase):
   id: int
 
   class Config:
-    orm_mode = True
+    from_attributes = True
 
 class IngredientCategoryBase(BaseModel):
   name: str
@@ -23,12 +23,12 @@ class IngredientCategoryCreate(IngredientCategoryBase):
 
 class IngredientCategory(IngredientCategoryBase):
   id: int
-  ingredients: list["Ingredient"] = []
+  # ingredients: list["Ingredient"] = []
   created_at: datetime
   modified_at: datetime
 
   class Config:
-    orm_mode = True
+    from_attributes = True
 
 class IngredientBase(BaseModel):
   category_id: int
@@ -44,4 +44,4 @@ class Ingredient(IngredientBase):
   category: IngredientCategory
 
   class Config:
-    orm_mode = True
+    from_attributes = True

@@ -1,0 +1,43 @@
+@import "./variables/sizes.css";
+@import "./variables/spacing.css";
+@import "./variables/shadows.css";
+@import "./variables/themes.css";
+@import "./variables/layers.css";
+@import "./globals/buttons.css";
+
+* {
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  margin: 0;
+  font-size: var(--root-font-size);
+  line-height: var(--body-line-height);
+  color: var(--text-main);
+  font-family: var(--default-font);
+  font-weight: var(--body-font-weight);
+  background-color: var(--background-color);
+}
+
+input, button {
+  font-size: 1rem;
+}
+
+p {
+  margin: 0.5em 0;
+}
+
+.custom-input {
+  padding: var(--custom-input-padding);
+}
+
+.recipe {
+  h2 {
+    font-size: var(--recipe-page-subtitle-size);
+  }
+}
+
+.error {
+  background-color: var(--error);
+  color: var(--text-on-error)
+}

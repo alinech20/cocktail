@@ -22,10 +22,10 @@ class Recipe(Base):
   note: Mapped[Optional[str]]
 
   created_at: Mapped[datetime] = mapped_column(server_default=func.current_timestamp())
-  modified_at: Mapped[datetime] = mapped_column(server_default=func.current_timestamp())
+  modified_at: Mapped[datetime] = mapped_column(onupdate=func.current_timestamp())
 
-  ingredients: Mapped[List[Ingredient]] = relationship(secondary="recipes.recipes_ingredients")
-  steps: Mapped[List["RecipeStep"]] = relationship()
+  ingredients: Mapped[List["RecipeIngredient"]] = relationship(lazy="joined")
+  steps: Mapped[List["RecipeStep"]] = relationship(lazy="joined")
 
 class RecipeIngredient(Base):
   __tablename__ = "recipes_ingredients"
@@ -35,11 +35,13 @@ class RecipeIngredient(Base):
   ingredient_id: Mapped[int] = mapped_column(ForeignKey("ingredients.ingredients.id"), primary_key=True)
   unit_id: Mapped[int] = mapped_column(ForeignKey("ingredients.units.id"))
   quantity: Mapped[float]
+  note: Mapped[Optional[str]]
 
   created_at: Mapped[datetime] = mapped_column(server_default=func.current_timestamp())
-  modified_at: Mapped[datetime] = mapped_column(server_default=func.current_timestamp())
+  modified_at: Mapped[datetime] = mapped_column(onupdate=func.current_timestamp())
 
-  unit: Mapped[IngredientUnit] = relationship()
+  unit: Mapped[IngredientUnit] = relationship(lazy="joined")
+  ingredient: Mapped[Ingredient] = relationship(lazy="joined")
 
 class RecipeStep(Base):
   __tablename__ = "recipes_steps"
@@ -50,4 +52,4 @@ class RecipeStep(Base):
   text: Mapped[str]
 
   created_at: Mapped[datetime] = mapped_column(server_default=func.current_timestamp())
-  modified_at: Mapped[datetime] = mapped_column(server_default=func.current_timestamp())
+  modified_at: Mapped[datetime] = mapped_column(onupdate=func.current_timestamp())
