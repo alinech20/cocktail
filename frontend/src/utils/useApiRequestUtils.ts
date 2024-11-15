@@ -9,7 +9,7 @@ export const useApiRequestUtils = () => {
     debug(`url: ${url}`)
     debug(`params: ${JSON.stringify(params)}`)
 
-    if (!params) throw 'params is undefined at replaceEndpointPlaceholders'
+    if (!params) return url
 
     if (Object.keys(params).length < 1)
       throw 'params is empty object at replaceEndpointPlaceholders'
@@ -32,7 +32,7 @@ export const useApiRequestUtils = () => {
     debug(`url: ${url}`)
     debug(`query: ${JSON.stringify(query)}`)
 
-    if (!query) throw 'query is undefined at addQueryParams'
+    if (!query) return url
 
     if (Object.keys(query).length < 1) throw 'query is empty object at addQueryParams'
 
