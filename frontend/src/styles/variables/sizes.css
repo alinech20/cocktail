@@ -4,9 +4,9 @@
 
   /* headers & footers */
   --posts-header-height: 60px;
-  --posts-header-width: 100vw;
+  --posts-header-width: 100%;
   --posts-footer-height: 60px;
-  --posts-footer-width: 100vw;
+  --posts-footer-width: 100%;
   --footer-navigation-icon-size: 1.5rem;
   --header-title-size: 2rem;
 
