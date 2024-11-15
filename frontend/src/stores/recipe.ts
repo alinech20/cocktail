@@ -54,6 +54,8 @@ export const useRecipeStore = defineStore(PINIA_STORE_KEYS.RECIPE, () => {
       } as IRecipeApiQueryParams
     })
 
+    if (!apiRequest) return
+
     const { data, error, onFetchResponse, onFetchError } = apiRequest.get().json()
 
     onFetchResponse(() => {
@@ -90,6 +92,8 @@ export const useRecipeStore = defineStore(PINIA_STORE_KEYS.RECIPE, () => {
         page: currentPage.value + 1
       } as IRecipeApiQueryParams
     })
+
+    if (!apiRequest) return
 
     const { data, error, onFetchResponse, onFetchError } = apiRequest.get().json()
 
@@ -151,14 +155,16 @@ export const useRecipeStore = defineStore(PINIA_STORE_KEYS.RECIPE, () => {
 
     currentRecipe.value = undefined
 
-    const { data, error, onFetchResponse, onFetchError } = useApiRequest({
+    const apiRequest = useApiRequest({
       url: API.RECIPES.BY_ID,
       params: {
         recipeId: id
       }
     })
-      .get()
-      .json()
+
+    if (!apiRequest) return
+
+    const { data, error, onFetchResponse, onFetchError } = apiRequest.get().json()
 
     onFetchResponse(() => {
       info('Got response from server')
