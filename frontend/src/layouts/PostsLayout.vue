@@ -35,7 +35,7 @@ window.onscroll = () => {
   <aside class="sidebar-right">
     <router-view class="posts-sidebar--right" name="rightSidebar" />
   </aside>
-  <footer class="footer">
+  <footer v-if="false" class="footer">
     <router-view class="posts-footer" name="footer" />
   </footer>
 </template>

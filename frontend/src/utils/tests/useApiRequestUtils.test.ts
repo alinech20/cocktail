@@ -8,16 +8,6 @@ describe('testing api request utils', () => {
   describe('testing replaceEndpointPlaceholders', () => {
     const { replaceEndpointPlaceholders } = apiRequestUtils
 
-    it('should throw error when params is undefined', () => {
-      const payload: IApiPath = {
-        url: 'recipes/'
-      }
-
-      expect(() => replaceEndpointPlaceholders(payload)).toThrow(
-        'params is undefined at replaceEndpointPlaceholders'
-      )
-    })
-
     it('should throw error when params has no keys', () => {
       const payload: IApiPath = {
         url: 'recipes/',
@@ -42,6 +32,14 @@ describe('testing api request utils', () => {
       )
     })
 
+    it('should not do anything when params is undefined', () => {
+      const result = replaceEndpointPlaceholders({
+        url: 'recipes/'
+      })
+
+      expect(result).toBe('recipes/')
+    })
+
     it('should replace recipeId with param', () => {
       const result = replaceEndpointPlaceholders({
         url: 'recipes/{recipeId}',
@@ -57,14 +55,6 @@ describe('testing api request utils', () => {
   describe('testing addQueryParams', () => {
     const { addQueryParams } = apiRequestUtils
 
-    it('should throw error when query is undefined', () => {
-      const payload: IApiPath = {
-        url: 'recipes/'
-      }
-
-      expect(() => addQueryParams(payload)).toThrow('query is undefined at addQueryParams')
-    })
-
     it('should throw error when query has no keys', () => {
       const payload: IApiPath = {
         url: 'recipes/',
@@ -72,6 +62,14 @@ describe('testing api request utils', () => {
       }
 
       expect(() => addQueryParams(payload)).toThrow('query is empty object at addQueryParams')
+    })
+
+    it('should not do anything when query is undefined', () => {
+      const result = addQueryParams({
+        url: 'recipes/'
+      })
+
+      expect(result).toBe('recipes/')
     })
 
     it('should add one query param', () => {
