@@ -19,7 +19,7 @@ export const useLogger = () => {
     instance.setLevel(level, true)
   }
 
-  const { formatApiError, formatTraceMessage, formatDebugMessage, formatInfoMessage } =
+  const { formatApiError, formatError, formatTraceMessage, formatDebugMessage, formatInfoMessage } =
     useLogFormatter()
 
   const trace = (msg: string) => {
@@ -38,12 +38,13 @@ export const useLogger = () => {
     instance.warn(msg)
   }
 
-  const error = (error: IApiCallError, display = true) => {
-    const formattedError = formatApiError(error)
+  const error = (error: IApiCallError | string, display = true) => {
+    const formattedError = typeof error === 'string' ? formatError(error) : formatApiError(error)
     instance.error(formattedError)
 
     if (display) {
-      const userError = `Error ${error.code} ${error.title}: ${error.url}`
+      const userError =
+        typeof error === 'string' ? error : `Error ${error.code} ${error.title}: ${error.url}`
 
       snackbar.emit({
         msg: userError,

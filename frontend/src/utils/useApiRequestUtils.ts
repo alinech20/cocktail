@@ -9,6 +9,11 @@ export const useApiRequestUtils = () => {
     debug(`url: ${url}`)
     debug(`params: ${JSON.stringify(params)}`)
 
+    if (!params) throw 'params is undefined at replaceEndpointPlaceholders'
+
+    if (Object.keys(params).length < 1)
+      throw 'params is empty object at replaceEndpointPlaceholders'
+
     for (const key in params) {
       debug(`Params key value: ${key}`)
       const placeholder = `{${key}}`
@@ -16,6 +21,7 @@ export const useApiRequestUtils = () => {
 
       // @ts-expect-error
       if (url.includes(placeholder)) url = url.replace(placeholder, params[key])
+      else throw 'Invalid param at replaceEndpointPlaceholders'
     }
 
     return url.replace(/\{(.*?)\}/gim, '').replace('//', '/')
@@ -26,6 +32,10 @@ export const useApiRequestUtils = () => {
     debug(`url: ${url}`)
     debug(`query: ${JSON.stringify(query)}`)
 
+    if (!query) throw 'query is undefined at addQueryParams'
+
+    if (Object.keys(query).length < 1) throw 'query is empty object at addQueryParams'
+
     let queryString = '?'
 
     for (const key in query) {
@@ -35,26 +45,9 @@ export const useApiRequestUtils = () => {
       queryString += `${key}=`
 
       // @ts-expect-error
-      if (Array.isArray(query[key])) {
-        info('Key has array value')
-        // @ts-expect-error
-        const count = query[key].length
-
-        for (let i = 0; i < count; i++) {
-          // @ts-expect-error
-          const val = query[key]
-          debug(`Value ${i + 1}: ${val}`)
-          queryString += `${val}`
-
-          if (i < count - 1) queryString += `&${key}=`
-        }
-      } else {
-        info('Key has one value')
-        // @ts-expect-error
-        const val = query[key]
-        debug(`Value: ${val}`)
-        queryString += `${val}`
-      }
+      const val = query[key]
+      debug(`Value: ${val}`)
+      queryString += `${val}`
     }
 
     debug(`Query string: ${queryString}`)

@@ -5,17 +5,25 @@ import { createFetch } from '@vueuse/core'
 import { useLogger } from './useLogger'
 
 export const useApiRequest = (path: IApiPath | string) => {
-  const { debug } = useLogger()
+  const { debug, error } = useLogger()
   const { replaceEndpointPlaceholders, addQueryParams } = useApiRequestUtils()
 
-  const endpoint =
-    typeof path === 'string'
-      ? path
-      : addQueryParams({
+  let endpoint: string
+
+  try {
+    endpoint =
+      typeof path === 'string'
+        ? path
+        : addQueryParams({
           url: replaceEndpointPlaceholders(path),
           query: path.query
         })
-  debug(`Final endpoint value: ${endpoint}`)
+
+    debug(`Final endpoint value: ${endpoint}`)
+  } catch (e) {
+    error(e as string)
+    return
+  }
 
   const apiCall = createFetch({
     baseUrl: API.BASE_URL,

@@ -7,6 +7,11 @@ export const useLogFormatter = () => {
     return `${getCurrentTimestamp()} ${error.code} ${error.title} Error occured at ${error.url}`
   }
 
+  const formatError = (error: string) => {
+    if (!error.length) return 'formatError got empty error'
+    return `${getCurrentTimestamp()} Error occured: ${error}`
+  }
+
   const formatTraceMessage = (msg: string) => {
     if (!msg.length) return 'formatTraceMessage got empty message'
     return `${getCurrentTimestamp()} TRACE: ${msg}`
@@ -24,6 +29,7 @@ export const useLogFormatter = () => {
 
   return {
     formatApiError,
+    formatError,
     formatTraceMessage,
     formatDebugMessage,
     formatInfoMessage

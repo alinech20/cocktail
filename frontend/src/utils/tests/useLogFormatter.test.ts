@@ -43,6 +43,21 @@ describe('testing log formatter', () => {
     })
   })
 
+  describe('testing formatError', () => {
+    const { formatError } = formatter
+
+    it('should return "error" message', () => {
+      expect(formatError('')).toBe('formatError got empty error')
+    })
+
+    it('should return formatted message', () => {
+      const formattedError = formatError('invalid stuff happening')
+
+      // trim datetime
+      expect(formattedError.slice(24)).toBe('Error occured: invalid stuff happening')
+    })
+  })
+
   describe('testing formatApiError', () => {
     const { formatApiError } = formatter
 
@@ -54,6 +69,7 @@ describe('testing log formatter', () => {
         url: 'test.com'
       })
 
+      // trim datetime
       expect(formattedError.slice(24)).toBe('404 Not Found Error occured at test.com')
     })
   })
