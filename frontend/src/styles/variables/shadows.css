@@ -1,6 +1,14 @@
 :root {
   --shadow-color: rgba(32, 32, 32, 0.2);
+
   --slightest-shadow: 0 0 2px 0 var(--shadow-color);
   --slight-shadow: 0 0 4px 0 var(--shadow-color);
   --slight-elevate-shadow: 0 0 6px 2px var(--shadow-color);
+
+}
+
+.tropical-fun {
+  --primary-shadow: rgba(255, 127, 80, 0.2);
+
+  --soft-shadow-primary: 0 2px 6px 0 var(--primary-shadow);
 }

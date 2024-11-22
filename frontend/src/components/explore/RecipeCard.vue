@@ -69,7 +69,8 @@ const getResizedPhoto = (photo: string) => {
   }
 
   border-radius: var(--recipe-card-border-radius);
-  box-shadow: var(--slight-shadow);
+  // box-shadow: var(--slight-shadow);
+  box-shadow: var(--soft-shadow-primary);
   background-color: var(--white);
 
   &__header,
