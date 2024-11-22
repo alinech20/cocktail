@@ -1,25 +1,46 @@
 <script setup lang="ts">
-import type { Component } from 'vue'
+import { onMounted, onUnmounted, ref, type Component } from 'vue'
 import CustomButton from './CustomButton.vue'
 
-defineProps<{
+const props = defineProps<{
   action: () => void
   placeholder: string
   buttonContent: string | Component
+  hideInput?: boolean
 }>()
 
 const model = defineModel()
+const showInput = ref(false)
+
+const hideInputOnDocumentClick = () => (showInput.value = false)
+
+const buttonClick = () => {
+  if (!props.hideInput) return props.action()
+  if (!showInput.value) return (showInput.value = true)
+  return (showInput.value = false)
+}
+
+onMounted(() => document.addEventListener('click', hideInputOnDocumentClick))
+onUnmounted(() => document.removeEventListener('click', hideInputOnDocumentClick))
 </script>
 
 <template>
   <article class="input-w-button" @keyup.enter="action">
     <input
       class="custom-input input-w-button__input"
+      :class="{
+        hide: hideInput && !showInput
+      }"
       v-model="model"
       type="text"
       :placeholder="placeholder"
+      @click.stop=""
     />
-    <CustomButton class="input-w-button__button" @click="action" :buttonContent="buttonContent" />
+    <CustomButton
+      class="input-w-button__button"
+      @click.stop="buttonClick"
+      :button-content="buttonContent"
+    />
   </article>
 </template>
 
@@ -30,12 +51,22 @@ const model = defineModel()
 
   &__input {
     width: 100%;
+    padding: var(--custom-input-padding);
+
     border-top-left-radius: var(--custom-input-border-radius);
     border-bottom-left-radius: var(--custom-input-border-radius);
     border-right: none;
+
+    transition: all 0.15s ease;
+
+    &.hide {
+      width: 0;
+      padding: 0;
+    }
   }
 
   &__button {
+    height: 40px;
     border-top-right-radius: var(--custom-input-border-radius);
     border-bottom-right-radius: var(--custom-input-border-radius);
     border-left: none;

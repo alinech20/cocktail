@@ -1,8 +1,13 @@
 :root {
   --faded-text: 0.8; /* use this for opacity on texts to create a secondary, dimmed text */
   --default-font: "Raleway", sans-serif;
-  --white: #fff;
   --body-font-weight: 500;
+
+  /* colors */
+  --white: #fff;
+  --border-light-gray: #ccc;
+  --text-main: #333333;
+  --overlay-dark: rgba(32, 32, 32, 0.6);
 }
 
 .tropical-fun--old {
@@ -48,7 +53,6 @@
   --text-on-error: var(--white);
 
   --background-color: #FFF5E1;
-  --text-main: #333333;
 }
 
 .dark {

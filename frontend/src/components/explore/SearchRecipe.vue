@@ -22,6 +22,7 @@ const searchRecipes = () => {
       placeholder="Search recipes..."
       :action="searchRecipes"
       :button-content="SearchIcon"
+      :hide-input="true"
     />
   </section>
 </template>
@@ -29,10 +30,8 @@ const searchRecipes = () => {
 <style lang="scss">
 .search-recipe {
   width: calc(100% - calc(2 * var(--small-item-spacer)));
-  // position: relative;
   padding: var(--small-item-spacer);
   background-color: var(--white);
-  // box-shadow: var(--slightest-shadow);
 
   input {
     border: none;
@@ -53,6 +52,10 @@ const searchRecipes = () => {
     color: var(--text-on-primary);
     border: 2px solid var(--primary-color);
     border-bottom-right-radius: 0;
+
+    &:hover {
+      opacity: var(--faded-text);
+    }
   }
 }
 </style>

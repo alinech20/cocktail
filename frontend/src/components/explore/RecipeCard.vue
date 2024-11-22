@@ -119,7 +119,6 @@ const getResizedPhoto = (photo: string) => {
 
   &__title {
     margin: 0;
-    font-size: 1.2rem;
     color: var(--text-primary);
 
     &:hover {
@@ -138,7 +137,6 @@ const getResizedPhoto = (photo: string) => {
   }
 
   &__see {
-    border: none;
     border-radius: var(--button-border-radius);
 
     &:hover {

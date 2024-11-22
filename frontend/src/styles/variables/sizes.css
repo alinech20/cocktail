@@ -15,12 +15,13 @@
 
   /* recipes */
   --recipe-card-width: 300px;
-  --recipe-page-title-size: 1.375rem;
-  --recipe-page-subtitle-size: 1.125rem;
+  /* --recipe-page-title-size: 1.5rem; */
+  /* --recipe-page-subtitle-size: 1.375rem; */
 
   /* others */
   --custom-input-border-radius: 8px;
   --recipe-card-border-radius: 12px;
+  --default-radius: 12px;
 
   /* screen sizes breakpoints */
   --tablet-screen: 768px;
