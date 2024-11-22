@@ -31,11 +31,11 @@ const getResizedPhoto = (photo: string) => {
 
 <template>
   <article class="recipe-card">
-    <section
-      class="recipe-card__header"
-      :style="`background-image: url(${getResizedPhoto(recipe.photo || 'https://placehold.co/300x150')});`"
-      @click="goToRecipe(recipe.id!)"
-    >
+    <section class="recipe-card__header" @click="goToRecipe(recipe.id!)">
+      <img
+        class="recipe-card__image"
+        :src="getResizedPhoto(recipe.photo || 'https://placehold.co/300x150')"
+      />
       <!--  -->
     </section>
     <section class="recipe-card__content">
@@ -72,15 +72,36 @@ const getResizedPhoto = (photo: string) => {
   box-shadow: var(--slight-shadow);
   background-color: var(--white);
 
+  &__header,
+  &__title,
+  &__see {
+    cursor: pointer;
+  }
+
   &__header {
     position: relative;
     height: calc(var(--recipe-card-width) / 2);
 
-    background-size: cover;
-    background-position: center;
-
     border-top-left-radius: var(--recipe-card-border-radius);
     border-top-right-radius: var(--recipe-card-border-radius);
+
+    overflow: hidden;
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    border-radius: inherit;
+
+    transition: transform 0.15s ease-out;
+
+    &:hover {
+      transform: scale(1.15);
+      width: 100%;
+      height: 100%;
+    }
   }
 
   &__content {
@@ -99,6 +120,10 @@ const getResizedPhoto = (photo: string) => {
     margin: 0;
     font-size: 1.2rem;
     color: var(--text-primary);
+
+    &:hover {
+      opacity: var(--faded-text);
+    }
   }
 
   &__ingredients-summary {
@@ -114,6 +139,10 @@ const getResizedPhoto = (photo: string) => {
   &__see {
     border: none;
     border-radius: var(--button-border-radius);
+
+    &:hover {
+      opacity: var(--faded-text);
+    }
   }
 }
 </style>
