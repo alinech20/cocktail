@@ -58,7 +58,7 @@ onBeforeMount(() => {
 
   &__title {
     text-align: center;
-    font-size: var(--recipe-page-title-size);
+    // font-size: var(--recipe-page-title-size);
     margin-left: var(--medium-item-spacer);
     margin-right: var(--medium-item-spacer);
   }

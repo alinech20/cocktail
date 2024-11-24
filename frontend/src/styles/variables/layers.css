@@ -1,3 +1,4 @@
 :root {
-  --header-z-index: 1000;
+  --header-z-index: 100;
+  --dialog-z-index: 200;
 }

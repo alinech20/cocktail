@@ -20,6 +20,11 @@ defineProps<{
   display: flex;
   justify-content: center;
   align-items: center;
+
   font-weight: 600;
+  border: none;
+  cursor: pointer;
+
+  background-color: var(--white);
 }
 </style>
