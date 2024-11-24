@@ -6,3 +6,13 @@
   background-color: var(--primary-color);
   color: var(--text-on-primary);
 }
+
+.btn--primary-inverse {
+  background-color: var(--text-on-primary);
+  color: var(--primary-color);
+}
+
+.btn--secondary {
+  background-color: var(--secondary-color);
+  color: var(--text-on-secondary);
+}

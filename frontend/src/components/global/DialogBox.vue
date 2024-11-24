@@ -1,9 +1,13 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted } from 'vue'
+import CloseIcon from '~icons/mdi/close'
+import CustomButton from './inputs/CustomButton.vue'
 
 defineProps<{
   width?: number
 }>()
+
+defineEmits(['close'])
 
 onMounted(() => document.body.classList.add('noscroll'))
 onUnmounted(() => document.body.classList.remove('noscroll'))
@@ -16,6 +20,7 @@ onUnmounted(() => document.body.classList.remove('noscroll'))
         <h1>
           <slot name="title">Dialog title</slot>
         </h1>
+        <CustomButton class="dialog__close" :button-content="CloseIcon" @click="$emit('close')" />
       </section>
       <section class="dialog__content">
         <slot name="content">Dialog content</slot>
@@ -53,10 +58,20 @@ onUnmounted(() => document.body.classList.remove('noscroll'))
   &__title {
     padding: var(--small-item-spacer) var(--medium-item-spacer);
     border-bottom: 1px solid var(--border-light-gray);
+    color: var(--primary-color);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
     h1 {
       margin: 0;
     }
+  }
+
+  &__close {
+    padding: 0;
+    font-size: 1.25rem;
   }
 
   &__content {

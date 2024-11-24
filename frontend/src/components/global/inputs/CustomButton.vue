@@ -22,9 +22,9 @@ defineProps<{
   align-items: center;
 
   font-weight: 600;
-
+  border: none;
   cursor: pointer;
 
-  border: none;
+  background-color: var(--white);
 }
 </style>

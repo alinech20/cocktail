@@ -16,6 +16,7 @@ body {
   color: var(--text-main);
   font-family: var(--default-font);
   font-weight: var(--body-font-weight);
+  letter-spacing: 0.062rem;;
   background-color: var(--background-color);
 }
 

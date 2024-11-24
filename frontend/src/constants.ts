@@ -7,6 +7,10 @@ export const API = {
   }
 }
 
+export const MAGIC_NUMBERS = {
+  ABOUT_CLICKS: 6
+}
+
 export const RECIPE_PAGE_SIZE = 10
 
 export const PINIA_STORE_KEYS = {
@@ -16,7 +20,10 @@ export const PINIA_STORE_KEYS = {
 export const SNACKBAR_DURATION = 5000
 
 export const BUS_EVENTS = {
-  SNACKBAR: 'bus-events:snackbar'
+  SNACKBAR: 'bus-events:snackbar',
+  DIALOGS: {
+    ABOUT: 'bus-events:dialogs:about'
+  }
 }
 
 export const CONSTANTS = {

@@ -35,7 +35,6 @@ const searchRecipes = () => {
 <style lang="scss">
 .search-recipe {
   padding: var(--small-item-spacer);
-  background-color: var(--white);
   width: 100%;
 
   &.input-hidden {
