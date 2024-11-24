@@ -9,15 +9,16 @@ const props = defineProps<{
   hideInput?: boolean
 }>()
 
+const emits = defineEmits(['setHideInput'])
+
 const model = defineModel()
 const showInput = ref(false)
 
-const hideInputOnDocumentClick = () => (showInput.value = false)
+const hideInputOnDocumentClick = () => emits('setHideInput', true)
 
 const buttonClick = () => {
   if (!props.hideInput) return props.action()
-  if (!showInput.value) return (showInput.value = true)
-  return (showInput.value = false)
+  if (!showInput.value) return emits('setHideInput', false)
 }
 
 onMounted(() => document.addEventListener('click', hideInputOnDocumentClick))
@@ -56,8 +57,6 @@ onUnmounted(() => document.removeEventListener('click', hideInputOnDocumentClick
     border-top-left-radius: var(--custom-input-border-radius);
     border-bottom-left-radius: var(--custom-input-border-radius);
     border-right: none;
-
-    transition: all 0.15s ease;
 
     &.hide {
       width: 0;

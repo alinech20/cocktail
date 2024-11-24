@@ -17,8 +17,6 @@ import HeaderMenu from '@/components/header/HeaderMenu.vue'
   max-width: var(--max-content-width);
 
   .search-recipe {
-    margin: 0 auto;
-
     // --tablet-screen
     @media only screen and (min-width: 769px) {
       max-width: var(--recipe-card-width);
