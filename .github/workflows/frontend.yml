@@ -2,12 +2,8 @@ name: Frontend Deploy
 
 on:
   push:
-    branches:
-      - master
     tags:
       - '*'
-    paths:
-      - 'frontend/**'
 
 jobs:
   build:
