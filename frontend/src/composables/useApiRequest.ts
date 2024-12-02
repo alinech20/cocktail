@@ -10,8 +10,6 @@ export const useApiRequest = (path: IApiPath | string) => {
 
   let endpoint: string
   const baseUrl = import.meta.env.VITE_API_BASE_URL || API.BASE_URL
-  console.log(baseUrl)
-  console.log(`env var is ${JSON.stringify(import.meta.env, null, 2)}`)
 
   try {
     endpoint =
