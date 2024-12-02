@@ -7,6 +7,8 @@ from v1 import api
 Base.metadata.create_all(bind=engine)
 
 origins = [
+  "https://cocktail-*.onrender*", # free prod environment on render
+  "https://cocktail-q612.onrender.com", # free prod environment on render
   "https://cocktail-q612.onrender.com/" # free prod environment on render
 ]
 
