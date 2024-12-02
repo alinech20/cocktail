@@ -15,7 +15,7 @@ dialog.on(() => (show.value = true))
     <template #content>
       <article class="about__content">
         <ul>
-          <li>Version 1.0.4</li>
+          <li>Version 1.0.6</li>
           <li>Developed by The Witty Penguin</li>
         </ul>
       </article>

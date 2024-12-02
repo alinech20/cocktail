@@ -2,12 +2,8 @@ name: Backend Deploy
 
 on:
   push:
-    branches:
-      - master
     tags:
       - '*'
-    paths:
-      - 'backend/**'
 
 jobs:
   build:
