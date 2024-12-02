@@ -9,7 +9,9 @@ export const useApiRequest = (path: IApiPath | string) => {
   const { replaceEndpointPlaceholders, addQueryParams } = useApiRequestUtils()
 
   let endpoint: string
-  const baseUrl = import.meta.env.VITE_API_BASE_URL ?? API.BASE_URL
+  const baseUrl = import.meta.env.VITE_API_BASE_URL || API.BASE_URL
+  console.log(baseUrl)
+  console.log(`env var is ${JSON.stringify(import.meta.env, null, 2)}`)
 
   try {
     endpoint =
