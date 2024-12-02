@@ -13,8 +13,8 @@ export const useLogger = () => {
   if (!instance) {
     instance = log.getLogger('root')
 
-    if (import.meta.env.PROD) return instance.setLevel('warn')
-    instance.setLevel('trace')
+    if (import.meta.env.PROD) instance.setLevel('warn')
+    else instance.setLevel('trace')
   }
 
   const setLevel = (level: LogLevelNames) => {
