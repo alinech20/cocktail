@@ -9,7 +9,7 @@ export const useApiRequest = (path: IApiPath | string) => {
   const { replaceEndpointPlaceholders, addQueryParams } = useApiRequestUtils()
 
   let endpoint: string
-  const baseUrl = import.meta.env.API_BASE_URL ?? API.BASE_URL
+  const baseUrl = import.meta.env.VITE_API_BASE_URL ?? API.BASE_URL
 
   try {
     endpoint =
