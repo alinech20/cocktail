@@ -9,6 +9,7 @@ export const useApiRequest = (path: IApiPath | string) => {
   const { replaceEndpointPlaceholders, addQueryParams } = useApiRequestUtils()
 
   let endpoint: string
+  const baseUrl = import.meta.env.API_BASE_URL ?? API.BASE_URL
 
   try {
     endpoint =
@@ -26,7 +27,7 @@ export const useApiRequest = (path: IApiPath | string) => {
   }
 
   const apiCall = createFetch({
-    baseUrl: API.BASE_URL,
+    baseUrl,
     options: {
       async onFetchError(ctx) {
         ctx.error = {
