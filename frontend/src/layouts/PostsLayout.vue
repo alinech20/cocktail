@@ -1,25 +1,25 @@
 <script setup lang="ts">
 import { router } from '@/router'
-import { useWindowScroll } from '@vueuse/core'
+// import { useWindowScroll } from '@vueuse/core'
 import { computed, ref } from 'vue'
 
 const hideHeader = computed(() => router.currentRoute.value.meta.header === false)
 
-const headerRef = ref<HTMLElement | undefined>()
-const headerHeight = 60
-const { y: scrollY } = useWindowScroll()
-let prevScrollY = scrollY.value
+// const headerRef = ref<HTMLElement | undefined>()
+// const headerHeight = 60
+// const { y: scrollY } = useWindowScroll()
+// let prevScrollY = scrollY.value
 
-window.onscroll = () => {
-  if (!headerRef.value) return
+// window.onscroll = () => {
+//   if (!headerRef.value) return
 
-  if (scrollY.value < headerHeight) return (headerRef.value.style.top = '0px')
+//   if (scrollY.value < headerHeight) return (headerRef.value.style.top = '0px')
 
-  if (scrollY.value > prevScrollY) headerRef.value.style.top = `-${headerHeight}px`
-  else headerRef.value.style.top = '0px'
+//   if (scrollY.value > prevScrollY) headerRef.value.style.top = `-${headerHeight}px`
+//   else headerRef.value.style.top = '0px'
 
-  prevScrollY = scrollY.value
-}
+//   prevScrollY = scrollY.value
+// }
 </script>
 
 <template>
