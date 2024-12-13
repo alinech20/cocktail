@@ -17,7 +17,7 @@ body {
   font-family: var(--default-font);
   font-weight: var(--body-font-weight);
   letter-spacing: 0.062rem;;
-  background-color: var(--background-color);
+  background-color: var(--white);
 }
 
 body.noscroll {

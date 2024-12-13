@@ -19,14 +19,13 @@ const searchRecipes = () => {
 </script>
 
 <template>
-  <section class="search-recipe" :class="{ 'input-hidden': hideInput }">
+  <section class="search-recipe">
     <InputWithButton
       class="search-recipe__input"
       v-model="searchTerm"
       placeholder="Search recipes..."
       :action="searchRecipes"
       :button-content="SearchIcon"
-      :hide-input="hideInput"
       @set-hide-input="setHideInput"
     />
   </section>
