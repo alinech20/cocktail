@@ -89,7 +89,8 @@ export const useRecipeStore = defineStore(PINIA_STORE_KEYS.RECIPE, () => {
     const apiRequest = useApiRequest({
       url: API.RECIPES.ALL,
       query: {
-        page: currentPage.value + 1
+        page: currentPage.value + 1,
+        size: RECIPE_PAGE_SIZE
       } as IRecipeApiQueryParams
     })
 
@@ -116,6 +117,7 @@ export const useRecipeStore = defineStore(PINIA_STORE_KEYS.RECIPE, () => {
   }
 
   const loadNextPage = async () => {
+    info('LOAD MORE TRIGGERRED!')
     info('Getting next page of recipes...')
     if (isFetching.value) {
       info('Still fetching the previous slice...')
