@@ -39,7 +39,7 @@ const toggleShowMenu = () => {
     <CustomButton
       class="header-menu__button btn--tight btn--primary-inverse"
       :button-content="MenuIcon"
-      @click="toggleShowMenu"
+      @click.stop.prevent="toggleShowMenu"
     />
     <!-- <MainMenu v-show="showMenu" /> -->
   </section>

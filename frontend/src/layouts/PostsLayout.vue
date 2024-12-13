@@ -65,6 +65,7 @@ window.onscroll = () => {
 
 .content {
   background-color: var(--background-color);
+  padding: var(--medium-item-spacer);
 }
 
 .footer {
