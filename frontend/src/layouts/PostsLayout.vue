@@ -65,6 +65,7 @@ const hideHeader = computed(() => router.currentRoute.value.meta.header === fals
 
 .content {
   background-color: var(--background-color);
+  padding: var(--medium-item-spacer);
 }
 
 .footer {

@@ -5,6 +5,7 @@ import { useRecipeStore } from '@/stores/recipe'
 import { useInfiniteScroll } from '@vueuse/core'
 import { storeToRefs } from 'pinia'
 import { ref } from 'vue'
+import NoResultsIcon from '~icons/mdi/emoticon-confused-outline'
 
 defineProps<{
   recipes: IRecipe[]
@@ -28,7 +29,10 @@ useInfiniteScroll(recipesContainer, async () => await loadNextPage(), {
     <section ref="recipesContainer" class="recipes-container" v-if="recipes.length > 0">
       <RecipeCard v-for="recipe in recipes" :key="recipe.id" :recipe="recipe" />
     </section>
-    <h3 v-else class="no-results">There are no recipes matching your search :(</h3>
+    <section class="no-results" v-else>
+      <NoResultsIcon class="no-results__icon" />
+      <h3>Uhm... We didn't find anything. Try searching for something else!</h3>
+    </section>
   </div>
 </template>
 
@@ -48,6 +52,20 @@ useInfiniteScroll(recipesContainer, async () => await loadNextPage(), {
     // to account for larger .recipe-card vertical margin
     height: calc(100vh - var(--posts-header-height) - var(--large-item-spacer));
     height: calc(100dvh - var(--posts-header-height) - var(--large-item-spacer));
+  }
+}
+
+.no-results {
+  text-align: center;
+  position: absolute;
+  width: 80%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+  color: var(--primary-color);
+
+  &__icon {
+    font-size: 10rem;
   }
 }
 </style>
